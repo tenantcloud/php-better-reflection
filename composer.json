@@ -1,6 +1,6 @@
 {
-	"name": "tenantcloud/php-serialization",
-	"description": "TenantCloud's serialization for PHP",
+	"name": "tenantcloud/php-better-reflection",
+	"description": "Reflection that accounts for features that are in static analysers, but aren't in the language yet",
 	"minimum-stability": "stable",
 	"license": "proprietary",
 	"authors": [
