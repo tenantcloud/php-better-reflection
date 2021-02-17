@@ -1,0 +1,5 @@
+parameters:
+	tmpDir: ./tmp/phpstan
+
+	featureToggles:
+		disableRuntimeReflectionProvider: true
