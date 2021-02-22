@@ -1,6 +1,6 @@
 <?php
 
-namespace TenantCloud\BetterReflection\Reflection\Impl\PHPStan\Resolved;
+namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
 use ReflectionAttribute;
 use ReflectionClass;

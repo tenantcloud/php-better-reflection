@@ -6,6 +6,9 @@ use ReflectionClass;
 use RuntimeException;
 use Throwable;
 
+/**
+ * @internal
+ */
 class ReflectionCacheKeyMaster
 {
 	public function key(ReflectionClass $classReflection): string

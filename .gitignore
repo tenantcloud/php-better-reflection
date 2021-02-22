@@ -13,6 +13,9 @@
 .php_cs.cache
 **/.phpunit.result.cache
 
+# Temporary
+tmp/
+
 # Misc
 .DS_Store
 /*.log

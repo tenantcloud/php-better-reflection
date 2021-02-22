@@ -1,5 +1,4 @@
 parameters:
-	tmpDir: ./tmp/phpstan
 	stubFiles: []
 	bootstrap: null
 	bootstrapFiles:

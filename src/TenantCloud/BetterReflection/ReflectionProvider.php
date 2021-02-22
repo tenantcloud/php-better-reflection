@@ -1,6 +1,6 @@
 <?php
 
-namespace TenantCloud\BetterReflection\Provider;
+namespace TenantCloud\BetterReflection;
 
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
 

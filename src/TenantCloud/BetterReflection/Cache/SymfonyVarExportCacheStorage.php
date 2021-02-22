@@ -6,9 +6,13 @@ use InvalidArgumentException;
 use Nette\Utils\Random;
 use PHPStan\Cache\CacheItem;
 use PHPStan\Cache\CacheStorage;
+use PHPStan\Cache\FileCacheStorage;
 use PHPStan\File\FileWriter;
 use Symfony\Component\VarExporter\VarExporter;
 
+/**
+ * Basically a {@see FileCacheStorage}, but uses Symfony's VarExporter as it's faster.
+ */
 class SymfonyVarExportCacheStorage implements CacheStorage
 {
 	private string $directory;

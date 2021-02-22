@@ -2,7 +2,7 @@
 	"name": "tenantcloud/php-better-reflection",
 	"description": "Reflection that accounts for features that are in static analysers, but aren't in the language yet",
 	"minimum-stability": "dev",
-	"license": "proprietary",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Oleksandr Prypkhan",
@@ -10,15 +10,22 @@
 		}
 	],
 	"require": {
-		"brick/varexporter": "dev-master",
 		"nette/bootstrap": "3.0.2",
 		"phpstan/phpstan-src": "dev-master#30ba6b03f10b6b8ed85c97196db58aad5306b73b",
-		"symfony/var-exporter": "5.x-dev"
+		"symfony/var-exporter": "5.x-dev",
+		"tenantcloud/php-standard": "^1.0.0"
+	},
+	"require-dev": {
+		"angle/chrono": "dev-master"
 	},
 	"repositories": [
 		{
 			"type": "git",
 			"url": "https://github.com/phpstan/phpstan-src"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/tenantcloud/php-standard"
 		}
 	],
 	"config": {
@@ -31,10 +38,7 @@
 	"autoload": {
 		"psr-0": {
 			"": "src/"
-		},
-		"files": [
-			"src/TenantCloud/Standard/Lazy/functions.php"
-		]
+		}
 	},
 	"autoload-dev": {
 		"psr-4": {
@@ -42,9 +46,8 @@
 		}
 	},
 	"scripts": {
-		"cs-fix": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
-	},
-	"require-dev": {
-		"angle/chrono": "dev-master"
+		"test": "./tools/phpunit/vendor/bin/phpunit",
+		"cs-fix": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -v --show-progress=estimating",
+		"phpstan":  "./tools/phpstan/vendor/bin/phpstan analyse"
 	}
 }

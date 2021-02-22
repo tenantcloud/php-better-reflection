@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c66f569759f75e13e6c376ad4f5bdb5b",
+    "content-hash": "2427c12743f76660625fefd197e0bcf4",
     "packages": [
         {
             "name": "composer/semver",
@@ -152,16 +152,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.11.1",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad"
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b17c5014ef81d212ac539f07a1001832df1b6d3b",
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b",
                 "shasum": ""
             },
             "require": {
@@ -176,11 +176,6 @@
                 "phpunit/phpunit": "^7.5 || ^9.1.5"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
@@ -221,9 +216,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.11.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.12.1"
             },
-            "time": "2020-10-26T10:28:16+00:00"
+            "time": "2021-02-21T21:00:45+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -2054,20 +2049,20 @@
         },
         {
             "name": "tenantcloud/php-cs-fixer-rule-sets",
-            "version": "1.0.3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tenantcloud/php-cs-fixer-rule-sets.git",
-                "reference": "5d19467c67edee6b0ecc448442093c23cb2d5ea9"
+                "reference": "e7691747170c55f1bf0297d779fed8661b28d071"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tenantcloud/php-cs-fixer-rule-sets/zipball/5d19467c67edee6b0ecc448442093c23cb2d5ea9",
-                "reference": "5d19467c67edee6b0ecc448442093c23cb2d5ea9",
+                "url": "https://api.github.com/repos/tenantcloud/php-cs-fixer-rule-sets/zipball/e7691747170c55f1bf0297d779fed8661b28d071",
+                "reference": "e7691747170c55f1bf0297d779fed8661b28d071",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.16.8",
+                "friendsofphp/php-cs-fixer": "^2.18.2",
                 "php": ">=7.4.9"
             },
             "require-dev": {
@@ -2095,9 +2090,9 @@
             "description": "TenantCloud's php-cs-fixer rule set",
             "support": {
                 "issues": "https://github.com/tenantcloud/php-cs-fixer-rule-sets/issues",
-                "source": "https://github.com/tenantcloud/php-cs-fixer-rule-sets/tree/1.0.3"
+                "source": "https://github.com/tenantcloud/php-cs-fixer-rule-sets/tree/1.1.0"
             },
-            "time": "2021-02-04T14:49:03+00:00"
+            "time": "2021-02-18T11:24:50+00:00"
         }
     ],
     "packages-dev": [],

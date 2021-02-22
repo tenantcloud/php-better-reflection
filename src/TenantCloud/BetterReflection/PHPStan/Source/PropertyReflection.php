@@ -1,6 +1,6 @@
 <?php
 
-namespace TenantCloud\BetterReflection\Reflection\Impl\PHPStan\Source;
+namespace TenantCloud\BetterReflection\PHPStan\Source;
 
 use PHPStan\Reflection\Php\PhpPropertyReflection;
 use PHPStan\Type\Type;

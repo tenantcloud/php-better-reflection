@@ -5,6 +5,9 @@ namespace TenantCloud\BetterReflection\Cache;
 use Closure;
 use PHPStan\Cache\CacheStorage;
 
+/**
+ * @internal
+ */
 class Cache
 {
 	public function __construct(

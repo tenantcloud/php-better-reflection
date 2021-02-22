@@ -1,19 +1,18 @@
 <?php
 
-namespace TenantCloud\BetterReflection\Reflection\Impl\PHPStan\Resolved;
+namespace TenantCloud\BetterReflection\PHPStan;
 
 use ReflectionClass;
 use TenantCloud\BetterReflection\Cache\Cache;
 use TenantCloud\BetterReflection\Cache\ReflectionCacheKeyMaster;
-use TenantCloud\BetterReflection\Provider\ReflectionProvider;
+use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedClassReflection;
+use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedFactory;
+use TenantCloud\BetterReflection\ReflectionProvider;
 
 /**
- * Wraps PHPStan based reflection with some caching magic.
- *
- * This is under PHPStan\ namespace because it's known which methods of the delegated PHPStan reflection
- * are executed quick and which aren't, so we're not generalizing all reflection sources.
+ * Provides reflection through PHPStan and partly native reflection with additional caching.
  */
-class CachedHalfResolvedReflectionProvider implements ReflectionProvider
+class PHPStanReflectionProvider implements ReflectionProvider
 {
 	public function __construct(
 		private ReflectionCacheKeyMaster $reflectionCacheKeyMaster,
