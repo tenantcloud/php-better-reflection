@@ -9,9 +9,9 @@ interface ReflectionProvider
 	/**
 	 * @template T
 	 *
-	 * @param class-string<T> $className
+	 * @param class-string<T>|T $classNameOrObject
 	 *
 	 * @return ClassReflection<T>
 	 */
-	public function provideClass(string $className): ClassReflection;
+	public function provideClass(mixed $classNameOrObject): ClassReflection;
 }

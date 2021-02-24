@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use PHPStan\Reflection\ParameterReflection;
+use TenantCloud\BetterReflection\PHPStan\Source\MethodReflection;
 use TenantCloud\BetterReflection\PHPStan\Source\PHPStanSourceProvider;
 use TenantCloud\BetterReflection\PHPStan\Source\PropertyReflection;
 use TenantCloud\Standard\Lazy\Lazy;
@@ -28,6 +30,23 @@ class HalfResolvedFactory
 					$propertyDelegate->type(),
 				),
 				$source->properties(),
+			),
+			array_map(
+				fn (MethodReflection $methodDelegate) => new HalfResolvedMethodReflection(
+					$className,
+					$methodDelegate->nativeMethod->getName(),
+					array_map(
+						fn (ParameterReflection $parameterDelegate) => new HalfResolvedFunctionParameterReflection(
+							$className,
+							$methodDelegate->nativeMethod->getName(),
+							$parameterDelegate->getName(),
+							$parameterDelegate->getType(),
+						),
+						$methodDelegate->variant->getParameters()
+					),
+					$methodDelegate->variant->getReturnType(),
+				),
+				$source->methods(),
 			),
 		);
 	}

@@ -21,14 +21,14 @@ class PHPStanReflectionProvider implements ReflectionProvider
 	) {
 	}
 
-	public function provideClass(string $className): HalfResolvedClassReflection
+	public function provideClass(mixed $classNameOrObject): HalfResolvedClassReflection
 	{
-		$reflection = new ReflectionClass($className);
+		$reflection = new ReflectionClass($classNameOrObject);
 
 		return $this->cache->remember(
 			$this->reflectionCacheKeyMaster->key($reflection),
 			$this->reflectionCacheKeyMaster->variableKey($reflection),
-			fn () => $this->halfResolvedFactory->create($className),
+			fn () => $this->halfResolvedFactory->create($reflection->getName()),
 		);
 	}
 }

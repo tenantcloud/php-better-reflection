@@ -9,8 +9,18 @@ use TenantCloud\BetterReflection\Delegation\PHPStan\DefaultReflectionProviderFac
 class ClassStub
 {
 	/** @var DefaultReflectionProviderFactory[] */
+	#[AttributeStub('4')]
 	private array $factories;
 
 	/** @var DefaultReflectionProviderFactory<SomeClass> */
 	private DefaultReflectionProviderFactory $generic;
+
+	/**
+	 * @param DefaultReflectionProviderFactory<SomeClass> $param
+	 */
+	#[AttributeStub('5')]
+	public function method(
+		#[AttributeStub('6')] DefaultReflectionProviderFactory $param
+	): int {
+	}
 }

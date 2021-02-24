@@ -2,7 +2,9 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Source;
 
+use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Reflection\Php\PhpClassReflectionExtension;
+use ReflectionMethod;
 use ReflectionProperty;
 
 class ClassReflection
@@ -30,5 +32,22 @@ class ClassReflection
 				$nativeProperty,
 			);
 		}, $nativeProperties);
+	}
+
+	public function methods(): array
+	{
+		$nativeMethods = $this->delegate
+			->getNativeReflection()
+			->getMethods();
+
+		return array_map(function (ReflectionMethod $nativeMethod) {
+			$extensionMethod = $this->phpClassReflectionExtension->getNativeMethod($this->delegate, $nativeMethod->getName());
+
+			return new MethodReflection(
+				$extensionMethod,
+				ParametersAcceptorSelector::selectSingle($extensionMethod->getVariants()),
+				$nativeMethod,
+			);
+		}, $nativeMethods);
 	}
 }

@@ -5,11 +5,14 @@ namespace Tests\TenantCloud\BetterReflection\PHPStan;
 use ComplexGenericsExample\SomeClass;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Generic\GenericObjectType;
+use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
 use PHPUnit\Framework\TestCase;
 use TenantCloud\BetterReflection\Delegation\PHPStan\DefaultReflectionProviderFactory;
 use TenantCloud\BetterReflection\PHPStan\DefaultPHPStanReflectionProviderFactory;
+use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedFunctionParameterReflection;
+use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedMethodReflection;
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedPropertyReflection;
 
 class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
@@ -57,5 +60,26 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 				)
 			),
 		], $properties);
+
+		$methods = $reflection->methods();
+		self::assertCount(1, $methods);
+		self::assertEquals([
+			new HalfResolvedMethodReflection(
+				ClassStub::class,
+				'method',
+				[
+					new HalfResolvedFunctionParameterReflection(
+						ClassStub::class,
+						'method',
+						'param',
+						new GenericObjectType(
+							DefaultReflectionProviderFactory::class,
+							[new ObjectType(SomeClass::class)],
+						)
+					),
+				],
+				new IntegerType(),
+			),
+		], $methods);
 	}
 }

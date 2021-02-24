@@ -5,16 +5,19 @@ namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 use ReflectionAttribute;
 use ReflectionClass;
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
+use TenantCloud\BetterReflection\Reflection\MethodReflection;
 use TenantCloud\BetterReflection\Reflection\PropertyReflection;
 
 class HalfResolvedClassReflection implements ClassReflection
 {
 	/**
 	 * @param PropertyReflection[] $properties
+	 * @param MethodReflection[]   $methods
 	 */
 	public function __construct(
 		private string $className,
 		private array $properties,
+		private array $methods,
 	) {
 	}
 
@@ -23,6 +26,7 @@ class HalfResolvedClassReflection implements ClassReflection
 		return new self(
 			className: $data['className'],
 			properties: $data['properties'],
+			methods: $data['methods'],
 		);
 	}
 
@@ -34,6 +38,11 @@ class HalfResolvedClassReflection implements ClassReflection
 	public function properties(): array
 	{
 		return $this->properties;
+	}
+
+	public function methods(): array
+	{
+		return $this->methods;
 	}
 
 	public function attributes(): array

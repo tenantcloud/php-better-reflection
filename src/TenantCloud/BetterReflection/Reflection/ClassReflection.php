@@ -15,6 +15,11 @@ interface ClassReflection extends QualifiableElement
 	public function properties(): array;
 
 	/**
+	 * @return MethodReflection<T, mixed>[]
+	 */
+	public function methods(): array;
+
+	/**
 	 * @return object[]
 	 */
 	public function attributes(): array;
