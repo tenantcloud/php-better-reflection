@@ -61,7 +61,7 @@ class HalfResolvedMethodReflection implements MethodReflection
 
 	public function invoke(object $receiver, mixed ...$args): mixed
 	{
-		return $this->nativeReflection()->invoke($receiver, $args);
+		return $this->nativeReflection()->invoke($receiver, ...$args);
 	}
 
 	private function nativeReflection(): ReflectionMethod
