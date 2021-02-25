@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
+use Ds\Sequence;
+
 /**
  * @template T Class being reflected
  */
@@ -10,17 +12,17 @@ interface ClassReflection extends QualifiableElement
 	public function fileName(): string;
 
 	/**
-	 * @return PropertyReflection<T, mixed>[]
+	 * @return Sequence<PropertyReflection<T, mixed>>
 	 */
-	public function properties(): array;
+	public function properties(): Sequence;
 
 	/**
-	 * @return MethodReflection<T, mixed>[]
+	 * @return Sequence<MethodReflection<T, mixed>>
 	 */
-	public function methods(): array;
+	public function methods(): Sequence;
 
 	/**
-	 * @return object[]
+	 * @return Sequence<object>
 	 */
-	public function attributes(): array;
+	public function attributes(): Sequence;
 }

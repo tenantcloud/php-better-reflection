@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use Ds\Sequence;
+use Ds\Vector;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionParameter;
@@ -37,14 +39,13 @@ class HalfResolvedFunctionParameterReflection implements FunctionParameterReflec
 		return $this->type;
 	}
 
-	public function attributes(): array
+	public function attributes(): Sequence
 	{
-		$nativeAttributes = $this->nativeReflection()->getAttributes();
-
-		return array_map(function (ReflectionAttribute $nativeAttribute) {
-			// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
-			return $nativeAttribute->newInstance();
-		}, $nativeAttributes);
+		return (new Vector($this->nativeReflection()->getAttributes()))
+			->map(function (ReflectionAttribute $nativeAttribute) {
+				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
+				return $nativeAttribute->newInstance();
+			});
 	}
 
 	private function nativeReflection(): ReflectionParameter

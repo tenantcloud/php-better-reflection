@@ -3,6 +3,7 @@
 namespace Tests\TenantCloud\BetterReflection\PHPStan;
 
 use ComplexGenericsExample\SomeClass;
+use Ds\Vector;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\IntegerType;
@@ -36,13 +37,13 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 
 		$attributes = $reflection->attributes();
 		self::assertCount(1, $attributes);
-		self::assertEquals([
+		self::assertEquals(new Vector([
 			new AttributeStub('123'),
-		], $attributes);
+		]), $attributes);
 
 		$properties = $reflection->properties();
 		self::assertCount(2, $properties);
-		self::assertEquals([
+		self::assertEquals(new Vector([
 			new HalfResolvedPropertyReflection(
 				ClassStub::class,
 				'factories',
@@ -59,11 +60,11 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 					[new ObjectType(SomeClass::class)],
 				)
 			),
-		], $properties);
+		]), $properties);
 
 		$methods = $reflection->methods();
 		self::assertCount(1, $methods);
-		self::assertEquals([
+		self::assertEquals(new Vector([
 			new HalfResolvedMethodReflection(
 				ClassStub::class,
 				'method',
@@ -80,6 +81,6 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 				],
 				new IntegerType(),
 			),
-		], $methods);
+		]), $methods);
 	}
 }

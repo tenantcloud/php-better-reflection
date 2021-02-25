@@ -2,6 +2,7 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
+use Ds\Sequence;
 use PHPStan\Type\Type;
 
 /**
@@ -13,16 +14,16 @@ interface MethodReflection
 	public function name(): string;
 
 	/**
-	 * @return FunctionParameterReflection[]
+	 * @return Sequence<FunctionParameterReflection>
 	 */
-	public function parameters(): array;
+	public function parameters(): Sequence;
 
 	public function returnType(): Type;
 
 	/**
-	 * @return object[]
+	 * @return Sequence<object>
 	 */
-	public function attributes(): array;
+	public function attributes(): Sequence;
 
 	/**
 	 * @param T $receiver

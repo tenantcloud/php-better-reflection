@@ -11,12 +11,16 @@
 	],
 	"require": {
 		"nette/bootstrap": "3.0.2",
-		"phpstan/phpstan-src": "dev-master#30ba6b03f10b6b8ed85c97196db58aad5306b73b",
+		"phpstan/phpstan-src": "dev-master#ca607485a43bf99a73aa6a4647c08e458d22674d",
 		"symfony/var-exporter": "5.x-dev",
-		"tenantcloud/php-standard": "^1.0.0"
+		"tenantcloud/php-standard": "^1.0.0",
+		"php-ds/php-ds": "dev-master"
 	},
 	"require-dev": {
 		"angle/chrono": "dev-master"
+	},
+	"suggest": {
+		"ext-ds": "*"
 	},
 	"repositories": [
 		{

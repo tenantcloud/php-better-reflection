@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use Ds\Sequence;
+use Ds\Vector;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionProperty;
@@ -35,14 +37,13 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 		return $this->type;
 	}
 
-	public function attributes(): array
+	public function attributes(): Sequence
 	{
-		$nativeAttributes = $this->nativeReflection()->getAttributes();
-
-		return array_map(function (ReflectionAttribute $nativeAttribute) {
-			// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
-			return $nativeAttribute->newInstance();
-		}, $nativeAttributes);
+		return (new Vector($this->nativeReflection()->getAttributes()))
+			->map(function (ReflectionAttribute $nativeAttribute) {
+				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
+				return $nativeAttribute->newInstance();
+			});
 	}
 
 	public function get(object $receiver)
@@ -57,6 +58,9 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 
 	private function nativeReflection(): ReflectionProperty
 	{
-		return new ReflectionProperty($this->className, $this->name);
+		$property = new ReflectionProperty($this->className, $this->name);
+		$property->setAccessible(true);
+
+		return $property;
 	}
 }

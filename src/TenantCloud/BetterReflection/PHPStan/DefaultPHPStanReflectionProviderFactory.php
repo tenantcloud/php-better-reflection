@@ -4,6 +4,8 @@ namespace TenantCloud\BetterReflection\PHPStan;
 
 use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\DI\Extensions\PhpExtension;
+use PHPStan\BetterReflection\BetterReflection;
+use PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber;
 use PHPStan\Broker\Broker;
 use PHPStan\DependencyInjection\Configurator;
 use PHPStan\DependencyInjection\Container;
@@ -12,8 +14,6 @@ use PHPStan\File\FileHelper;
 use PHPStan\Php\PhpVersion;
 use PHPStan\Reflection\Php\PhpClassReflectionExtension;
 use PHPStan\Reflection\ReflectionProvider;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber;
 use TenantCloud\BetterReflection\Cache\Cache;
 use TenantCloud\BetterReflection\Cache\ReflectionCacheKeyMaster;
 use TenantCloud\BetterReflection\Cache\SymfonyVarExportCacheStorage;

@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use Ds\Sequence;
+use Ds\Vector;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionMethod;
@@ -36,9 +38,9 @@ class HalfResolvedMethodReflection implements MethodReflection
 		return $this->name;
 	}
 
-	public function parameters(): array
+	public function parameters(): Sequence
 	{
-		return $this->parameters;
+		return new Vector($this->parameters);
 	}
 
 	public function returnType(): Type
@@ -46,14 +48,13 @@ class HalfResolvedMethodReflection implements MethodReflection
 		return $this->returnType;
 	}
 
-	public function attributes(): array
+	public function attributes(): Sequence
 	{
-		$nativeAttributes = $this->nativeReflection()->getAttributes();
-
-		return array_map(function (ReflectionAttribute $nativeAttribute) {
-			// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
-			return $nativeAttribute->newInstance();
-		}, $nativeAttributes);
+		return (new Vector($this->nativeReflection()->getAttributes()))
+			->map(function (ReflectionAttribute $nativeAttribute) {
+				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
+				return $nativeAttribute->newInstance();
+			});
 	}
 
 	public function invoke(object $receiver, mixed ...$args): mixed
@@ -63,6 +64,9 @@ class HalfResolvedMethodReflection implements MethodReflection
 
 	private function nativeReflection(): ReflectionMethod
 	{
-		return new ReflectionMethod($this->className, $this->name);
+		$method = new ReflectionMethod($this->className, $this->name);
+		$method->setAccessible(true);
+
+		return $method;
 	}
 }

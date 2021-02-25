@@ -2,6 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use Ds\Sequence;
+use Ds\Vector;
 use ReflectionAttribute;
 use ReflectionClass;
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
@@ -35,24 +37,23 @@ class HalfResolvedClassReflection implements ClassReflection
 		return $this->nativeReflection()->getFileName();
 	}
 
-	public function properties(): array
+	public function properties(): Sequence
 	{
-		return $this->properties;
+		return new Vector($this->properties);
 	}
 
-	public function methods(): array
+	public function methods(): Sequence
 	{
-		return $this->methods;
+		return new Vector($this->methods);
 	}
 
-	public function attributes(): array
+	public function attributes(): Sequence
 	{
-		$nativeAttributes = $this->nativeReflection()->getAttributes();
-
-		return array_map(function (ReflectionAttribute $nativeAttribute) {
-			// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
-			return $nativeAttribute->newInstance();
-		}, $nativeAttributes);
+		return (new Vector($this->nativeReflection()->getAttributes()))
+			->map(function (ReflectionAttribute $nativeAttribute) {
+				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
+				return $nativeAttribute->newInstance();
+			});
 	}
 
 	public function qualifiedName(): string
