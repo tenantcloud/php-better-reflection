@@ -37,7 +37,7 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 		return $this->type;
 	}
 
-	public function attributes(): Sequence
+	public function attributes(): AttributeSequence
 	{
 		return (new Vector($this->nativeReflection()->getAttributes()))
 			->map(function (ReflectionAttribute $nativeAttribute) {
