@@ -11,8 +11,5 @@ interface FunctionParameterReflection
 
 	public function type(): Type;
 
-	/**
-	 * @return Sequence<object>
-	 */
-	public function attributes(): Sequence;
+	public function attributes(): AttributeSequence;
 }

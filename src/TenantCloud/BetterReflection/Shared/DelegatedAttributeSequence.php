@@ -1,13 +1,9 @@
 <?php
 
-
 namespace TenantCloud\BetterReflection\Shared;
 
-
 use Ds\Sequence;
-use Exception;
 use TenantCloud\BetterReflection\Reflection\AttributeSequence;
-use Traversable;
 
 class DelegatedAttributeSequence implements AttributeSequence
 {
@@ -94,9 +90,9 @@ class DelegatedAttributeSequence implements AttributeSequence
 		return $this->delegate->contains(...$values);
 	}
 
-	public function filter(callable $callback = null): Sequence
+	public function filter(callable $callback = null): AttributeSequence
 	{
-		return $this->delegate->filter($callback);
+		return new self($this->delegate->filter($callback));
 	}
 
 	public function find($value)
@@ -129,14 +125,14 @@ class DelegatedAttributeSequence implements AttributeSequence
 		return $this->delegate->last();
 	}
 
-	public function map(callable $callback): Sequence
+	public function map(callable $callback): AttributeSequence
 	{
-		return $this->delegate->map($callback);
+		return new self($this->delegate->map($callback));
 	}
 
-	public function merge($values): Sequence
+	public function merge($values): AttributeSequence
 	{
-		return $this->delegate->merge($values);
+		return new self($this->delegate->merge($values));
 	}
 
 	public function pop()
@@ -164,9 +160,9 @@ class DelegatedAttributeSequence implements AttributeSequence
 		return $this->delegate->reverse();
 	}
 
-	public function reversed()
+	public function reversed(): AttributeSequence
 	{
-		return $this->delegate->reversed();
+		return new self($this->delegate->reversed());
 	}
 
 	public function rotate(int $rotations)
@@ -184,9 +180,9 @@ class DelegatedAttributeSequence implements AttributeSequence
 		return $this->delegate->shift();
 	}
 
-	public function slice(int $index, int $length = null): Sequence
+	public function slice(int $index, int $length = null): AttributeSequence
 	{
-		return $this->delegate->slice($index, $length);
+		return new self($this->delegate->slice($index, $length));
 	}
 
 	public function sort(callable $comparator = null)
@@ -194,9 +190,9 @@ class DelegatedAttributeSequence implements AttributeSequence
 		return $this->delegate->sort($comparator);
 	}
 
-	public function sorted(callable $comparator = null): Sequence
+	public function sorted(callable $comparator = null): AttributeSequence
 	{
-		return $this->delegate->sorted($comparator);
+		return new self($this->delegate->sorted($comparator));
 	}
 
 	public function sum()

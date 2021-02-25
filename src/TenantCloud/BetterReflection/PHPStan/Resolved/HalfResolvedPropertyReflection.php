@@ -7,7 +7,9 @@ use Ds\Vector;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionProperty;
+use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\PropertyReflection;
+use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedPropertyReflection implements PropertyReflection
 {
@@ -39,7 +41,7 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 
 	public function attributes(): AttributeSequence
 	{
-		return (new Vector($this->nativeReflection()->getAttributes()))
+		return(new DelegatedAttributeSequence(new Vector($this->nativeReflection()->getAttributes())))
 			->map(function (ReflectionAttribute $nativeAttribute) {
 				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
 				return $nativeAttribute->newInstance();

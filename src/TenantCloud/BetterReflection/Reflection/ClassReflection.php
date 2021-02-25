@@ -21,8 +21,5 @@ interface ClassReflection extends QualifiableElement
 	 */
 	public function methods(): Sequence;
 
-	/**
-	 * @return Sequence<object>
-	 */
-	public function attributes(): Sequence;
+	public function attributes(): AttributeSequence;
 }

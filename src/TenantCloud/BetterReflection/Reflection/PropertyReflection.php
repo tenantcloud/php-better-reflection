@@ -16,9 +16,9 @@ interface PropertyReflection
 	public function type(): Type;
 
 	/**
-	 * @return Sequence<object>
+	 * @return AttributeSequence
 	 */
-	public function attributes(): Sequence;
+	public function attributes(): AttributeSequence;
 
 	/**
 	 * @param T $receiver

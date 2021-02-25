@@ -7,7 +7,9 @@ use Ds\Vector;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionParameter;
+use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\FunctionParameterReflection;
+use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedFunctionParameterReflection implements FunctionParameterReflection
 {
@@ -39,9 +41,9 @@ class HalfResolvedFunctionParameterReflection implements FunctionParameterReflec
 		return $this->type;
 	}
 
-	public function attributes(): Sequence
+	public function attributes(): AttributeSequence
 	{
-		return (new Vector($this->nativeReflection()->getAttributes()))
+		return (new DelegatedAttributeSequence(new Vector($this->nativeReflection()->getAttributes())))
 			->map(function (ReflectionAttribute $nativeAttribute) {
 				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
 				return $nativeAttribute->newInstance();

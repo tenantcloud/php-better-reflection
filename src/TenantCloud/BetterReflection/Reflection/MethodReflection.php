@@ -20,10 +20,7 @@ interface MethodReflection
 
 	public function returnType(): Type;
 
-	/**
-	 * @return Sequence<object>
-	 */
-	public function attributes(): Sequence;
+	public function attributes(): AttributeSequence;
 
 	/**
 	 * @param T $receiver
