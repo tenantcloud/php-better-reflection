@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"nette/bootstrap": "3.0.2",
-		"phpstan/phpstan-src": "dev-master#ca607485a43bf99a73aa6a4647c08e458d22674d",
+		"phpstan/phpstan-src": "dev-master#d97ddee4d53fa82962452f2b9fe60c334b9149f9",
 		"symfony/var-exporter": "5.x-dev",
 		"tenantcloud/php-standard": "^1.0.0",
 		"php-ds/php-ds": "dev-master"
