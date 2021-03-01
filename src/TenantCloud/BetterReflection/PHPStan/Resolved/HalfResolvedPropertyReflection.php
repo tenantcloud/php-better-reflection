@@ -2,8 +2,9 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
-use Ds\Sequence;
 use Ds\Vector;
+use PHPStan\Type\Generic\TemplateTypeHelper;
+use PHPStan\Type\Generic\TemplateTypeMap;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionProperty;
@@ -41,7 +42,7 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 
 	public function attributes(): AttributeSequence
 	{
-		return(new DelegatedAttributeSequence(new Vector($this->nativeReflection()->getAttributes())))
+		return (new DelegatedAttributeSequence(new Vector($this->nativeReflection()->getAttributes())))
 			->map(function (ReflectionAttribute $nativeAttribute) {
 				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
 				return $nativeAttribute->newInstance();
@@ -56,6 +57,18 @@ class HalfResolvedPropertyReflection implements PropertyReflection
 	public function set(object $receiver, mixed $value): void
 	{
 		$this->nativeReflection()->setValue($receiver, $value);
+	}
+
+	public function withTemplateTypeMap(TemplateTypeMap $map): self
+	{
+		return new self(
+			className: $this->className,
+			name: $this->name,
+			type: TemplateTypeHelper::resolveTemplateTypes(
+				$this->type,
+				$map
+			)
+		);
 	}
 
 	private function nativeReflection(): ReflectionProperty

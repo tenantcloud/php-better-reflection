@@ -1,8 +1,6 @@
 <?php
 
-
 namespace TenantCloud\BetterReflection\Reflection;
-
 
 use Ds\Sequence;
 

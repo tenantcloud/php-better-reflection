@@ -10,7 +10,7 @@ use ReflectionProperty;
 class ClassReflection
 {
 	public function __construct(
-		private \PHPStan\Reflection\ClassReflection $delegate,
+		public \PHPStan\Reflection\ClassReflection $delegate,
 		private PhpClassReflectionExtension $phpClassReflectionExtension,
 	) {
 	}

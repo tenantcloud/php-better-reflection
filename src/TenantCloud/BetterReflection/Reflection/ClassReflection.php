@@ -12,6 +12,11 @@ interface ClassReflection extends QualifiableElement
 	public function fileName(): string;
 
 	/**
+	 * @return Sequence<TypeParameterReflection>
+	 */
+	public function typeParameters(): Sequence;
+
+	/**
 	 * @return Sequence<PropertyReflection<T, mixed>>
 	 */
 	public function properties(): Sequence;

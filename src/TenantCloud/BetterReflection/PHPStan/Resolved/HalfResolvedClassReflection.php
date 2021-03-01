@@ -4,24 +4,26 @@ namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
 use Ds\Sequence;
 use Ds\Vector;
+use PHPStan\Type\ErrorType;
+use PHPStan\Type\Generic\TemplateTypeMap;
 use ReflectionAttribute;
 use ReflectionClass;
 use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
-use TenantCloud\BetterReflection\Reflection\MethodReflection;
-use TenantCloud\BetterReflection\Reflection\PropertyReflection;
 use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedClassReflection implements ClassReflection
 {
 	/**
-	 * @param PropertyReflection[] $properties
-	 * @param MethodReflection[]   $methods
+	 * @param HalfResolvedPropertyReflection[]      $properties
+	 * @param HalfResolvedMethodReflection[]        $methods
+	 * @param HalfResolvedTypeParameterReflection[] $typeParameters
 	 */
 	public function __construct(
 		private string $className,
 		private array $properties,
 		private array $methods,
+		private array $typeParameters,
 	) {
 	}
 
@@ -31,12 +33,18 @@ class HalfResolvedClassReflection implements ClassReflection
 			className: $data['className'],
 			properties: $data['properties'],
 			methods: $data['methods'],
+			typeParameters: $data['typeParameters']
 		);
 	}
 
 	public function fileName(): string
 	{
 		return $this->nativeReflection()->getFileName();
+	}
+
+	public function typeParameters(): Sequence
+	{
+		return new Vector($this->typeParameters);
 	}
 
 	public function properties(): Sequence
@@ -61,6 +69,32 @@ class HalfResolvedClassReflection implements ClassReflection
 	public function qualifiedName(): string
 	{
 		return $this->className;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function withTypes(array $types): self
+	{
+		$map = [];
+		$i = 0;
+
+		foreach ($this->typeParameters as $tag) {
+			$map[$tag->name()] = $types[$i] ?? new ErrorType();
+			$i++;
+		}
+
+		return $this->withTemplateTypeMap(new TemplateTypeMap($map));
+	}
+
+	public function withTemplateTypeMap(TemplateTypeMap $map): self
+	{
+		return new self(
+			className: $this->className,
+			properties: array_map(fn (HalfResolvedPropertyReflection $reflection) => $reflection->withTemplateTypeMap($map), $this->properties),
+			methods: array_map(fn (HalfResolvedMethodReflection $reflection)      => $reflection->withTemplateTypeMap($map), $this->methods),
+			typeParameters: $this->typeParameters,
+		);
 	}
 
 	private function nativeReflection(): ReflectionClass

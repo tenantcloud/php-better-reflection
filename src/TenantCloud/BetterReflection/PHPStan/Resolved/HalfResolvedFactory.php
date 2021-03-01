@@ -2,7 +2,11 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
+use PHPStan\PhpDoc\Tag\TemplateTag;
 use PHPStan\Reflection\ParameterReflection;
+use PHPStan\Type\Generic\TemplateTypeVariance;
+use PHPStan\Type\Type;
+use TenantCloud\BetterReflection\PHPStan\Source\ClassReflection;
 use TenantCloud\BetterReflection\PHPStan\Source\MethodReflection;
 use TenantCloud\BetterReflection\PHPStan\Source\PHPStanSourceProvider;
 use TenantCloud\BetterReflection\PHPStan\Source\PropertyReflection;
@@ -19,23 +23,33 @@ class HalfResolvedFactory
 
 	public function create(string $className): HalfResolvedClassReflection
 	{
+		/** @var ClassReflection $source */
 		$source = $this->sourceProvider->value()->provideClass($className);
 
 		return new HalfResolvedClassReflection(
-			$className,
-			array_map(
+			className: $className,
+			properties: array_map(
 				fn (PropertyReflection $propertyDelegate) => new HalfResolvedPropertyReflection(
-					$className,
-					$propertyDelegate->nativeProperty->getName(),
-					$propertyDelegate->type(),
+					className: $className,
+					name: $propertyDelegate->nativeProperty->getName(),
+					type: $propertyDelegate->type(),
 				),
 				$source->properties(),
 			),
-			array_map(
+			methods: array_map(
 				fn (MethodReflection $methodDelegate) => new HalfResolvedMethodReflection(
-					$className,
-					$methodDelegate->nativeMethod->getName(),
-					array_map(
+					className: $className,
+					name: $methodDelegate->nativeMethod->getName(),
+					typeParameters: array_map(
+						fn (Type $type, string $name) => new HalfResolvedTypeParameterReflection(
+							name: $name,
+							upperBound: $type,
+							variance: TemplateTypeVariance::createInvariant(),
+						),
+						$methodDelegate->variant->getTemplateTypeMap()->getTypes(),
+						array_keys($methodDelegate->variant->getTemplateTypeMap()->getTypes())
+					),
+					parameters: array_map(
 						fn (ParameterReflection $parameterDelegate) => new HalfResolvedFunctionParameterReflection(
 							$className,
 							$methodDelegate->nativeMethod->getName(),
@@ -44,10 +58,18 @@ class HalfResolvedFactory
 						),
 						$methodDelegate->variant->getParameters()
 					),
-					$methodDelegate->variant->getReturnType(),
+					returnType: $methodDelegate->variant->getReturnType(),
 				),
 				$source->methods(),
 			),
+			typeParameters: array_map(
+				fn (TemplateTag $typeParameterDelegate) => new HalfResolvedTypeParameterReflection(
+					name: $typeParameterDelegate->getName(),
+					upperBound: $typeParameterDelegate->getBound(),
+					variance: $typeParameterDelegate->getVariance(),
+				),
+				$source->delegate->getTemplateTags(),
+			)
 		);
 	}
 }

@@ -2,8 +2,9 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
-use Ds\Sequence;
 use Ds\Vector;
+use PHPStan\Type\Generic\TemplateTypeHelper;
+use PHPStan\Type\Generic\TemplateTypeMap;
 use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionParameter;
@@ -48,6 +49,19 @@ class HalfResolvedFunctionParameterReflection implements FunctionParameterReflec
 				// Why, PHP? Why the hell wouldn't you JUST give a list of instantiated attributes like other languages? ...
 				return $nativeAttribute->newInstance();
 			});
+	}
+
+	public function withTemplateTypeMap(TemplateTypeMap $map): self
+	{
+		return new self(
+			className: $this->className,
+			functionName: $this->functionName,
+			name: $this->name,
+			type: TemplateTypeHelper::resolveTemplateTypes(
+				$this->type,
+				$map
+			)
+		);
 	}
 
 	private function nativeReflection(): ReflectionParameter

@@ -2,7 +2,6 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
-use Ds\Sequence;
 use PHPStan\Type\Type;
 
 /**
@@ -15,9 +14,6 @@ interface PropertyReflection
 
 	public function type(): Type;
 
-	/**
-	 * @return AttributeSequence
-	 */
 	public function attributes(): AttributeSequence;
 
 	/**

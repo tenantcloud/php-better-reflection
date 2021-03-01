@@ -14,6 +14,11 @@ interface MethodReflection
 	public function name(): string;
 
 	/**
+	 * @return Sequence<TypeParameterReflection>
+	 */
+	public function typeParameters(): Sequence;
+
+	/**
 	 * @return Sequence<FunctionParameterReflection>
 	 */
 	public function parameters(): Sequence;

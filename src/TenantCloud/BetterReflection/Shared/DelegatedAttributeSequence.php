@@ -9,12 +9,13 @@ class DelegatedAttributeSequence implements AttributeSequence
 {
 	public function __construct(
 		private Sequence $delegate,
-	) {}
+	) {
+	}
 
 	public function has(string $className): bool
 	{
 		return !$this->delegate
-			->filter(fn (object $attribute) => get_class($attribute) === $className)
+			->filter(fn (object $attribute) => $className === get_class($attribute))
 			->isEmpty();
 	}
 

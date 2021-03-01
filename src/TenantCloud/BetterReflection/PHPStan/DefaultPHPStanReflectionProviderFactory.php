@@ -25,6 +25,7 @@ class DefaultPHPStanReflectionProviderFactory
 {
 	public function __construct(private string $cacheDir)
 	{
+		PHPStanReflectionProvider::bindBroker();
 	}
 
 	public function create(): PHPStanReflectionProvider
