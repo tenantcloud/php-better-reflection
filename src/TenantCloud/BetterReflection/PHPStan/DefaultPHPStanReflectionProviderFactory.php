@@ -23,7 +23,7 @@ use function TenantCloud\Standard\Lazy\lazy;
 
 class DefaultPHPStanReflectionProviderFactory
 {
-	public function __construct(private string $cacheDir)
+	public function __construct(private string $cacheDir, private array $additionalConfigs = [])
 	{
 		PHPStanReflectionProvider::bindBroker();
 	}
@@ -85,6 +85,10 @@ class DefaultPHPStanReflectionProviderFactory
 			'singleReflectionFile' => null,
 		]);
 		$configurator->addConfig(__DIR__ . '/config.neon');
+
+		foreach ($this->additionalConfigs as $config) {
+			$configurator->addConfig($config);
+		}
 
 		$container = $configurator->createContainer();
 
