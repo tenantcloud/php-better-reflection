@@ -35,6 +35,7 @@
 	},
 	"scripts": {
 		"pre-install-cmd": [
+			"composer i --working-dir=relocation/php-scoper",
 			"composer i --working-dir=relocation",
 			"@relocate"
 		],
