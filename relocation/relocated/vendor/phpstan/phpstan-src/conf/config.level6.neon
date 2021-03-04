@@ -1,0 +1,16 @@
+includes:
+	- config.level5.neon
+
+parameters:
+	checkGenericClassInNonGenericObjectType: true
+	checkMissingIterableValueType: true
+	checkMissingVarTagTypehint: true
+	checkMissingTypehints: true
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\MissingFunctionParameterTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\MissingFunctionReturnTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\MissingMethodParameterTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\MissingMethodReturnTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\MissingPropertyTypehintRule
+

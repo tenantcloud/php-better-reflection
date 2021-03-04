@@ -4,13 +4,13 @@ namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
 use Ds\Sequence;
 use Ds\Vector;
-use PHPStan\Type\Generic\TemplateTypeHelper;
-use PHPStan\Type\Generic\TemplateTypeMap;
-use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionMethod;
 use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\MethodReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeHelper;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeMap;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedMethodReflection implements MethodReflection

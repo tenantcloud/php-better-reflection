@@ -2,7 +2,6 @@
 
 namespace Tests\TenantCloud\BetterReflection\PHPStan;
 
-use ComplexGenericsExample\SomeClass;
 use Ds\Pair;
 use TenantCloud\BetterReflection\Delegation\PHPStan\DefaultReflectionProviderFactory;
 
@@ -17,13 +16,13 @@ class ClassStub
 	#[AttributeStub('4')]
 	private array $factories;
 
-	/** @var DefaultReflectionProviderFactory<SomeClass, T> */
+	/** @var DefaultReflectionProviderFactory<SomeStub, T> */
 	private DefaultReflectionProviderFactory $generic;
 
 	/**
 	 * @template G
 	 *
-	 * @param DefaultReflectionProviderFactory<SomeClass, T> $param
+	 * @param DefaultReflectionProviderFactory<SomeStub, T> $param
 	 *
 	 * @return Pair<S, G>
 	 */

@@ -3,7 +3,7 @@
 namespace TenantCloud\BetterReflection\Cache;
 
 use Closure;
-use PHPStan\Cache\CacheStorage;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Cache\CacheStorage;
 
 /**
  * @internal

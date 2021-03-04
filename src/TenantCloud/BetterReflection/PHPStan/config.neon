@@ -50,7 +50,7 @@ parameters:
 		nodesByFileCountMax: 1024
 		nodesByStringCountMax: 1024
 	reportUnmatchedIgnoredErrors: true
-	scopeClass: PHPStan\Analyser\MutatingScope
+	scopeclass: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\MutatingScope
 	typeAliases: []
 	universalObjectCratesClasses:
 		- stdClass
@@ -106,8 +106,8 @@ parameters:
 		- OPENSSL_VERSION_NUMBER
 
 extensions:
-	conditionalTags: PHPStan\DependencyInjection\ConditionalTagsExtension
-	parametersSchema: PHPStan\DependencyInjection\ParametersSchemaExtension
+	conditionalTags: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\ConditionalTagsExtension
+	parametersSchema: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\ParametersSchemaExtension
 
 parametersSchema:
 	bootstrap: schema(string(), nullable())
@@ -204,7 +204,7 @@ services:
 		class: PhpParser\BuilderFactory
 
 	-
-		class: PHPStan\Parser\LexerFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\LexerFactory
 
 	-
 		class: PhpParser\NodeVisitor\NameResolver
@@ -216,80 +216,80 @@ services:
 		class: PhpParser\PrettyPrinter\Standard
 
 	-
-		class: PHPStan\Broker\AnonymousClassNameHelper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Broker\AnonymousClassNameHelper
 		arguments:
 			relativePathHelper: @simpleRelativePathHelper
 
 	-
-		class: PHPStan\Php\PhpVersion
-		factory: @PHPStan\Php\PhpVersionFactory::create
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersion
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersionFactory::create
 
 	-
-		class: PHPStan\Php\PhpVersionFactory
-		factory: @PHPStan\Php\PhpVersionFactoryFactory::create
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersionFactory
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersionFactoryFactory::create
 
 	-
-		class: PHPStan\Php\PhpVersionFactoryFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersionFactoryFactory
 		arguments:
 			versionId: %phpVersion%
 			readComposerPhpVersion: %featureToggles.readComposerPhpVersion%
 			composerAutoloaderProjectPaths: %composerAutoloaderProjectPaths%
 
 	-
-		class: PHPStan\PhpDocParser\Lexer\Lexer
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDocParser\Lexer\Lexer
 
 	-
-		class: PHPStan\PhpDocParser\Parser\TypeParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDocParser\Parser\TypeParser
 
 	-
-		class: PHPStan\PhpDocParser\Parser\ConstExprParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDocParser\Parser\ConstExprParser
 
 	-
-		class: PHPStan\PhpDocParser\Parser\PhpDocParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDocParser\Parser\PhpDocParser
 
 	-
-		class: PHPStan\PhpDoc\PhpDocInheritanceResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\PhpDocInheritanceResolver
 
 	-
-		class: PHPStan\PhpDoc\PhpDocNodeResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\PhpDocNodeResolver
 
 	-
-		class: PHPStan\PhpDoc\PhpDocStringResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\PhpDocStringResolver
 
 	-
-		class: PHPStan\PhpDoc\ConstExprNodeResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\ConstExprNodeResolver
 
 	-
-		class: PHPStan\PhpDoc\TypeAlias\TypeAliasesTypeNodeResolverExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\TypeAlias\TypeAliasesTypeNodeResolverExtension
 		arguments:
 			aliases: %typeAliases%
 		tags:
 			- phpstan.phpDoc.typeNodeResolverExtension
 
 	-
-		class: PHPStan\PhpDoc\TypeNodeResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\TypeNodeResolver
 
 	-
-		class: PHPStan\PhpDoc\TypeNodeResolverExtensionRegistryProvider
-		factory: PHPStan\PhpDoc\LazyTypeNodeResolverExtensionRegistryProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\TypeNodeResolverExtensionRegistryProvider
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\LazyTypeNodeResolverExtensionRegistryProvider
 
 	-
-		class: PHPStan\PhpDoc\TypeStringResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\TypeStringResolver
 
 	-
-		class: PHPStan\Analyser\FileAnalyser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\FileAnalyser
 		arguments:
 			reportUnmatchedIgnoredErrors: %reportUnmatchedIgnoredErrors%
 
 	-
-		class: PHPStan\Analyser\LazyScopeFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\LazyScopeFactory
 		arguments:
 			scopeClass: %scopeClass%
 		autowired:
-			- PHPStan\Analyser\ScopeFactory
+			- TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeFactory
 
 	-
-		class: PHPStan\Analyser\NodeScopeResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\NodeScopeResolver
 		arguments:
 			classReflector: @nodeScopeResolverClassReflector
 			polluteScopeWithLoopInitialAssignments: %polluteScopeWithLoopInitialAssignments%
@@ -299,590 +299,590 @@ services:
 			earlyTerminatingFunctionCalls: %earlyTerminatingFunctionCalls%
 
 	-
-		class: PHPStan\Cache\Cache
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Cache\Cache
 		arguments:
 			storage: @cacheStorage
 
 	-
-		class: PHPStan\Dependency\DependencyDumper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Dependency\DependencyDumper
 		arguments:
 			fileFinder: @fileFinderAnalyse
 
 	-
-		class: PHPStan\Dependency\DependencyResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Dependency\DependencyResolver
 
 	-
-		class: PHPStan\Dependency\ExportedNodeFetcher
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Dependency\ExportedNodeFetcher
 
 	-
-		class: PHPStan\Dependency\ExportedNodeResolver
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Dependency\ExportedNodeResolver
 
 	-
-		class: PHPStan\Dependency\ExportedNodeVisitor
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Dependency\ExportedNodeVisitor
 
 	-
-		class: PHPStan\DependencyInjection\Container
-		factory: PHPStan\DependencyInjection\MemoizingContainer
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Container
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\MemoizingContainer
 		arguments:
-			originalContainer: @PHPStan\DependencyInjection\Nette\NetteContainer
+			originalContainer: @TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Nette\NetteContainer
 
 	-
-		class: PHPStan\DependencyInjection\Nette\NetteContainer
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Nette\NetteContainer
 		autowired:
-			- PHPStan\DependencyInjection\Nette\NetteContainer
+			- TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Nette\NetteContainer
 
 	-
-		class: PHPStan\DependencyInjection\Reflection\ClassReflectionExtensionRegistryProvider
-		factory: PHPStan\DependencyInjection\Reflection\LazyClassReflectionExtensionRegistryProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Reflection\ClassReflectionExtensionRegistryProvider
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Reflection\LazyClassReflectionExtensionRegistryProvider
 
 	-
-		class: PHPStan\DependencyInjection\Type\DynamicReturnTypeExtensionRegistryProvider
-		factory: PHPStan\DependencyInjection\Type\LazyDynamicReturnTypeExtensionRegistryProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\DynamicReturnTypeExtensionRegistryProvider
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\LazyDynamicReturnTypeExtensionRegistryProvider
 
 	-
-		class: PHPStan\DependencyInjection\Type\OperatorTypeSpecifyingExtensionRegistryProvider
-		factory: PHPStan\DependencyInjection\Type\LazyOperatorTypeSpecifyingExtensionRegistryProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\OperatorTypeSpecifyingExtensionRegistryProvider
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\LazyOperatorTypeSpecifyingExtensionRegistryProvider
 
 	-
-		class: PHPStan\File\FileHelper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileHelper
 		arguments:
 			workingDirectory: %currentWorkingDirectory%
 
 	-
-		class: PHPStan\File\FileExcluderFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluderFactory
 		arguments:
 			obsoleteExcludesAnalyse: %excludes_analyse%
 			excludePaths: %excludePaths%
 
 	-
-		implement: PHPStan\File\FileExcluderRawFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluderRawFactory
 		arguments:
 			stubFiles: %stubFiles%
 
 	fileExcluderAnalyse:
-		class: PHPStan\File\FileExcluder
-		factory: @PHPStan\File\FileExcluderFactory::createAnalyseFileExcluder()
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluder
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluderFactory::createAnalyseFileExcluder()
 		autowired: false
 
 	fileExcluderScan:
-		class: PHPStan\File\FileExcluder
-		factory: @PHPStan\File\FileExcluderFactory::createScanFileExcluder()
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluder
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\File\FileExcluderFactory::createScanFileExcluder()
 		autowired: false
 
 	fileFinderAnalyse:
-		class: PHPStan\File\FileFinder
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileFinder
 		arguments:
 			fileExcluder: @fileExcluderAnalyse
 			fileExtensions: %fileExtensions%
 		autowired: false
 
 	fileFinderScan:
-		class: PHPStan\File\FileFinder
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileFinder
 		arguments:
 			fileExcluder: @fileExcluderScan
 			fileExtensions: %fileExtensions%
 		autowired: false
 
 	-
-		class: PHPStan\File\FileMonitor
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\FileMonitor
 		arguments:
 			fileFinder: @fileFinderAnalyse
 
 	-
-		class: PHPStan\NodeVisitor\StatementOrderVisitor
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\NodeVisitor\StatementOrderVisitor
 
 	-
-		class: PHPStan\Parser\CachedParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\CachedParser
 		arguments:
 			originalParser: @pathRoutingParser
 			cachedNodesByStringCountMax: %cache.nodesByStringCountMax%
 
 	-
-		class: PHPStan\Parser\FunctionCallStatementFinder
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\FunctionCallStatementFinder
 
 	-
-		class: PHPStan\Process\CpuCoreCounter
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Process\CpuCoreCounter
 
 	-
-		implement: PHPStan\Reflection\FunctionReflectionFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\FunctionReflectionFactory
 
 	-
-		class: PHPStan\Reflection\Annotations\AnnotationsMethodsClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Annotations\AnnotationsMethodsClassReflectionExtension
 
 	-
-		class: PHPStan\Reflection\Annotations\AnnotationsPropertiesClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Annotations\AnnotationsPropertiesClassReflectionExtension
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\CachingVisitor
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\CachingVisitor
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\FileNodesFetcher
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\FileNodesFetcher
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\AutoloadSourceLocator
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\AutoloadSourceLocator
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\ComposerJsonAndInstalledJsonSourceLocatorMaker
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\ComposerJsonAndInstalledJsonSourceLocatorMaker
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedDirectorySourceLocatorFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedDirectorySourceLocatorFactory
 		arguments:
 			fileFinder: @fileFinderScan
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedDirectorySourceLocatorRepository
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedDirectorySourceLocatorRepository
 
 	-
-		implement: PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedPsrAutoloaderLocatorFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedPsrAutoloaderLocatorFactory
 
 	-
-		implement: PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedSingleFileSourceLocatorFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedSingleFileSourceLocatorFactory
 
 	-
-		class: PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedSingleFileSourceLocatorRepository
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\SourceLocator\OptimizedSingleFileSourceLocatorRepository
 
 	-
-		class: PHPStan\Reflection\Mixin\MixinMethodsClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Mixin\MixinMethodsClassReflectionExtension
 		tags:
 			- phpstan.broker.methodsClassReflectionExtension
 		arguments:
 			mixinExcludeClasses: %mixinExcludeClasses%
 
 	-
-		class: PHPStan\Reflection\Mixin\MixinPropertiesClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Mixin\MixinPropertiesClassReflectionExtension
 		tags:
 			- phpstan.broker.propertiesClassReflectionExtension
 		arguments:
 			mixinExcludeClasses: %mixinExcludeClasses%
 
 	-
-		class: PHPStan\Reflection\Php\PhpClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpClassReflectionExtension
 		arguments:
 			inferPrivatePropertyTypeFromConstructor: %inferPrivatePropertyTypeFromConstructor%
 			universalObjectCratesClasses: %universalObjectCratesClasses%
 
 	-
-		implement: PHPStan\Reflection\Php\PhpMethodReflectionFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpMethodReflectionFactory
 
 	-
-		class: PHPStan\Reflection\Php\UniversalObjectCratesClassReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\UniversalObjectCratesClassReflectionExtension
 		tags:
 			- phpstan.broker.propertiesClassReflectionExtension
 		arguments:
 			classes: %universalObjectCratesClasses%
 
 	-
-		class: PHPStan\Reflection\ReflectionProvider\ReflectionProviderProvider
-		factory: PHPStan\Reflection\ReflectionProvider\LazyReflectionProviderProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider\ReflectionProviderProvider
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider\LazyReflectionProviderProvider
 
 	-
-		class: PHPStan\Reflection\SignatureMap\NativeFunctionReflectionProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\NativeFunctionReflectionProvider
 
 	-
-		class: PHPStan\Reflection\SignatureMap\SignatureMapParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\SignatureMapParser
 
 	-
-		class: PHPStan\Reflection\SignatureMap\FunctionSignatureMapProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\FunctionSignatureMapProvider
 		autowired:
-			- PHPStan\Reflection\SignatureMap\FunctionSignatureMapProvider
+			- TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\FunctionSignatureMapProvider
 
 	-
-		class: PHPStan\Reflection\SignatureMap\Php8SignatureMapProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\Php8SignatureMapProvider
 		autowired:
-			- PHPStan\Reflection\SignatureMap\Php8SignatureMapProvider
+			- TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\Php8SignatureMapProvider
 
 	-
-		class: PHPStan\Reflection\SignatureMap\SignatureMapProviderFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\SignatureMapProviderFactory
 
 	-
-		class: PHPStan\Reflection\SignatureMap\SignatureMapProvider
-		factory: @PHPStan\Reflection\SignatureMap\SignatureMapProviderFactory::create()
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\SignatureMapProvider
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\SignatureMap\SignatureMapProviderFactory::create()
 
 	-
-		class: PHPStan\Type\FileTypeMapper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\FileTypeMapper
 
 	-
-		class: PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\CountFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\CountFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\CurlInitReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\CurlInitReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\DateFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\DateFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\DsMapDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\DsMapDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\GetClassDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\GetClassDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 	-
-		class: PHPStan\Type\Php\HashHmacFunctionsReturnTypeExtension
-		tags:
-			- phpstan.broker.dynamicFunctionReturnTypeExtension
-
-	-
-		class: PHPStan\Type\Php\HashFunctionsReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\HashHmacFunctionsReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\HashFunctionsReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicFunctionReturnTypeExtension
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension
 		tags:
 			- phpstan.broker.propertiesClassReflectionExtension
 
 	-
-		class: PHPStan\Type\Php\StatDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\StatDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\VarExportFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\VarExportFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\MbFunctionsReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\MbFunctionsReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\PowFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\PowFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\RangeFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\RangeFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension
 		arguments:
 			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	-
-		class: PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension
 		tags:
 			- phpstan.broker.dynamicFunctionReturnTypeExtension
 
 	typeSpecifier:
-		class: PHPStan\Analyser\TypeSpecifier
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\TypeSpecifier
 		factory: @typeSpecifierFactory::create
 
 	typeSpecifierFactory:
-		class: PHPStan\Analyser\TypeSpecifierFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\TypeSpecifierFactory
 
 	relativePathHelper:
-		class: PHPStan\File\RelativePathHelper
-		factory: PHPStan\File\FuzzyRelativePathHelper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\RelativePathHelper
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\File\FuzzyRelativePathHelper
 		arguments:
 			currentWorkingDirectory: %currentWorkingDirectory%
 			analysedPaths: %analysedPaths%
 			fallbackRelativePathHelper: @parentDirectoryRelativePathHelper
 
 	simpleRelativePathHelper:
-		class: PHPStan\File\RelativePathHelper
-		factory: PHPStan\File\SimpleRelativePathHelper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\RelativePathHelper
+		factory: TenantCloud\BetterReflection\Relocated\PHPStan\File\SimpleRelativePathHelper
 		arguments:
 			currentWorkingDirectory: %currentWorkingDirectory%
 		autowired: false
 
 	parentDirectoryRelativePathHelper:
-		class: PHPStan\File\ParentDirectoryRelativePathHelper
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\File\ParentDirectoryRelativePathHelper
 		arguments:
 			parentDirectory: %currentWorkingDirectory%
 		autowired: false
 
 	broker:
-		class: PHPStan\Broker\Broker
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker
 		factory: @brokerFactory::create
 		autowired:
-			- PHPStan\Broker\Broker
+			- TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker
 
 	brokerFactory:
-		class: PHPStan\Broker\BrokerFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Broker\BrokerFactory
 
 	cacheStorage:
-		class: PHPStan\Cache\FileCacheStorage
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Cache\FileCacheStorage
 		arguments:
 			directory: %tmpDir%/cache/PHPStan
 		autowired: no
 
 	currentPhpVersionRichParser:
-		class: PHPStan\Parser\RichParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\RichParser
 		arguments:
 			parser: @currentPhpVersionPhpParser
 		autowired: no
 
 	currentPhpVersionSimpleParser:
-		class: PHPStan\Parser\SimpleParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\SimpleParser
 		arguments:
 			parser: @currentPhpVersionPhpParser
 		autowired: no
 
 	phpParserDecorator:
-		class: PHPStan\Parser\PhpParserDecorator
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\PhpParserDecorator
 		arguments:
-			wrappedParser: @PHPStan\Parser\Parser
+			wrappedParser: @TenantCloud\BetterReflection\Relocated\PHPStan\Parser\Parser
 		autowired:
 			- PhpParser\Parser
 
 	currentPhpVersionLexer:
 		class: PhpParser\Lexer
-		factory: @PHPStan\Parser\LexerFactory::create()
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Parser\LexerFactory::create()
 		autowired: false
 
 	currentPhpVersionPhpParser:
@@ -892,31 +892,31 @@ services:
 		autowired: false
 
 	stubPhpDocProvider:
-		class: PHPStan\PhpDoc\StubPhpDocProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\StubPhpDocProvider
 		arguments:
 			stubFiles: %stubFiles%
 
 	# Reflection providers
 
 	reflectionProviderFactory:
-		class: PHPStan\Reflection\ReflectionProvider\ReflectionProviderFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider\ReflectionProviderFactory
 		arguments:
 			runtimeReflectionProvider: @runtimeReflectionProvider
 			staticReflectionProvider: @betterReflectionProvider
 			disableRuntimeReflectionProvider: %featureToggles.disableRuntimeReflectionProvider%
 
 	reflectionProvider:
-		factory: @PHPStan\Reflection\ReflectionProvider\ReflectionProviderFactory::create
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider\ReflectionProviderFactory::create
 		autowired:
-			- PHPStan\Reflection\ReflectionProvider
+			- TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider
 
 	betterReflectionSourceLocator:
-		class: PHPStan\BetterReflection\SourceLocator\Type\SourceLocator
-		factory: @PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory::create
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\Type\SourceLocator
+		factory: @TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory::create
 		autowired: false
 
 	betterReflectionClassReflector:
-		class: PHPStan\Reflection\BetterReflection\Reflector\MemoizingClassReflector
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\Reflector\MemoizingClassReflector
 		arguments:
 			sourceLocator: @betterReflectionSourceLocator
 		autowired: false
@@ -926,21 +926,21 @@ services:
 		autowired: false
 
 	betterReflectionFunctionReflector:
-		class: PHPStan\Reflection\BetterReflection\Reflector\MemoizingFunctionReflector
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\Reflector\MemoizingFunctionReflector
 		arguments:
 			classReflector: @betterReflectionClassReflector
 			sourceLocator: @betterReflectionSourceLocator
 		autowired: false
 
 	betterReflectionConstantReflector:
-		class: PHPStan\Reflection\BetterReflection\Reflector\MemoizingConstantReflector
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\Reflector\MemoizingConstantReflector
 		arguments:
 			classReflector: @betterReflectionClassReflector
 			sourceLocator: @betterReflectionSourceLocator
 		autowired: false
 
 	betterReflectionProvider:
-		class: PHPStan\Reflection\BetterReflection\BetterReflectionProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\BetterReflectionProvider
 		arguments:
 			classReflector: @betterReflectionClassReflector
 			functionReflector: @betterReflectionFunctionReflector
@@ -957,17 +957,17 @@ services:
 			streamName: 'hoa://Library/Regex/Grammar.pp'
 
 	runtimeReflectionProvider:
-		class: PHPStan\Reflection\ReflectionProvider\ClassBlacklistReflectionProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider\ClassBlacklistReflectionProvider
 		arguments:
 			reflectionProvider: @innerRuntimeReflectionProvider
 			patterns: %staticReflectionClassNamePatterns%
 		autowired: false
 
 	innerRuntimeReflectionProvider:
-		class: PHPStan\Reflection\Runtime\RuntimeReflectionProvider
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Runtime\RuntimeReflectionProvider
 
 	-
-		class: PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory
 		arguments:
 			parser: @phpParserDecorator
 			php8Parser: @php8PhpParser
@@ -982,20 +982,20 @@ services:
 			staticReflectionClassNamePatterns: %staticReflectionClassNamePatterns%
 
 	-
-		implement: PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory
+		implement: TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory
 
 	-
-		class: PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
 		arguments:
 			phpParser: @php8PhpParser
 			phpVersionId: %phpVersion%
 		autowired:
-			- PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
+			- TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
 
 	-
-		class: PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
 		autowired:
-			- PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
+			- TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
 
 	php8Lexer:
 		class: PhpParser\Lexer\Emulative
@@ -1008,13 +1008,13 @@ services:
 		autowired: false
 
 	php8Parser:
-		class: PHPStan\Parser\SimpleParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\SimpleParser
 		arguments:
 			parser: @php8PhpParser
 		autowired: false
 
 	pathRoutingParser:
-		class: PHPStan\Parser\PathRoutingParser
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Parser\PathRoutingParser
 		arguments:
 			currentPhpVersionRichParser: @currentPhpVersionRichParser
 			currentPhpVersionSimpleParser: @currentPhpVersionSimpleParser

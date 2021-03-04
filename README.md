@@ -19,6 +19,16 @@ on CI container build or on production itself. This isn't ideal, even though is 
 Instead, we're storing reflection metadata per-class in a separate "caching" folder and base it around 
 file modification date. If anything changes in a file, the previous cache gets overwritten.
 
+### Relocation (scoping) of phpstan/phpstan-src
+Sadly, PHPStan doesn't have a separate library for it's type system, nor does it want to have one due
+to maintenance costs. To overcome a ton of incompatibilities (such as locked package versions, 
+emulated PHP version and interoperability with static analysers of this and all dependent projects),
+it's been decided to instead install it separately, relocate and then include the relocated sources
+as a dependency.
+
+This is far from perfect, but maintaining a whole type system of our own until PHP introduces at least
+some of the PHPStan features, namely generics, is much harder than what currently takes it to relocate.
+
 ## Commands
 Install dependencies:
 `docker run -it --rm -v $PWD:/app -w /app composer install`

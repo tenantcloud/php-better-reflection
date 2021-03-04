@@ -1,0 +1,36 @@
+parameters:
+	property: test
+
+services:
+	lorem:
+		factory: TenantCloud\BetterReflection\Relocated\Lorem
+		setup:
+			- test(2)
+			- @lorem::test(3)
+			- [@self, test](4)
+			- Ipsum::staticTest(5)
+			- @ipsum::test(6)
+			- ::globtest(7)
+			-
+				@lorem::$test: null
+
+			- [@self, $test](true)
+			-
+				$test: false
+
+			- $%property%(8)
+			-
+				"$arr[]": 1
+
+			-
+				"$arr[]": 2
+
+			- Ipsum::$staticTest(9)
+			- @ipsum::$%property%(Lorem())
+			- Ipsum(a)::test()
+			- Ipsum(b)::test(10)
+			- \Ipsum(@self)
+
+	ipsum:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+

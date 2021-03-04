@@ -1,0 +1,222 @@
+parameters:
+	customRulesetUsed: false
+	missingClosureNativeReturnCheckObjectTypehint: false
+
+conditionalTags:
+	PHPStan\Rules\Functions\ClosureUsesThisRule:
+		phpstan.rules.rule: %featureToggles.closureUsesThis%
+
+	PHPStan\Rules\Missing\MissingClosureNativeReturnTypehintRule:
+		phpstan.rules.rule: %checkMissingClosureNativeReturnTypehintRule%
+
+	PHPStan\Rules\Whitespace\FileWhitespaceRule:
+		phpstan.rules.rule: %featureToggles.fileWhitespace%
+
+	PHPStan\Rules\Properties\UninitializedPropertyRule:
+		phpstan.rules.rule: %checkUninitializedProperties%
+
+parametersSchema:
+	missingClosureNativeReturnCheckObjectTypehint: bool()
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\DuplicateKeysInLiteralArraysRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\EmptyArrayItemRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\OffsetAccessWithoutDimForReadingRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Cast\UnsetCastRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ClassAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ClassConstantAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ClassConstantRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\DuplicateDeclarationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ExistingClassesInClassImplementsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ExistingClassesInInterfaceExtendsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ExistingClassInClassExtendsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ExistingClassInTraitUseRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\InstantiationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\InvalidPromotedPropertiesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\NewStaticRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\NonClassAttributeClassRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\TraitAttributeClassRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Exceptions\ThrowExpressionRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ArrowFunctionAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ArrowFunctionReturnNullsafeByRefRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\CallToFunctionParametersRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ClosureAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ExistingClassesInArrowFunctionTypehintsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ExistingClassesInClosureTypehintsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ExistingClassesInTypehintsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\FunctionAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\InnerFunctionRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ParamAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\PrintfParametersRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ReturnNullsafeByRefRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Keywords\ContinueBreakInLoopRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\AbstractMethodInNonAbstractClassRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\ExistingClassesInTypehintsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\MissingMethodImplementationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\MethodAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Operators\InvalidAssignVarRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\AccessPropertiesInAssignRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\AccessStaticPropertiesInAssignRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\PropertyAttributesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\UnsetRule
+
+services:
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ExistingClassInInstanceOfRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkClassCaseSensitivity: %checkClassCaseSensitivity%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkClassCaseSensitivity: %checkClassCaseSensitivity%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\CallToNonExistentFunctionRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkFunctionNameCase: %checkFunctionNameCase%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ClosureUsesThisRule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\CallMethodsRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkFunctionNameCase: %checkFunctionNameCase%
+			reportMagicMethods: %reportMagicMethods%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\CallStaticMethodsRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkFunctionNameCase: %checkFunctionNameCase%
+			reportMagicMethods: %reportMagicMethods%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\OverridingMethodRule
+		arguments:
+			checkPhpDocMethodSignatures: %checkPhpDocMethodSignatures%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Missing\MissingClosureNativeReturnTypehintRule
+		arguments:
+			checkObjectTypehint: %missingClosureNativeReturnCheckObjectTypehint%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Missing\MissingReturnRule
+		arguments:
+			checkExplicitMixedMissingReturn: %checkExplicitMixedMissingReturn%
+			checkPhpDocMissingReturn: %checkPhpDocMissingReturn%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkFunctionNameCase: %checkFunctionNameCase%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Namespaces\ExistingNamesInUseRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkFunctionNameCase: %checkFunctionNameCase%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Operators\InvalidIncDecOperationRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkThisOnly: %checkThisOnly%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\AccessPropertiesRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			reportMagicProperties: %reportMagicProperties%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\AccessStaticPropertiesRule
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\ExistingClassesInPropertiesRule
+		tags:
+			- phpstan.rules.rule
+
+		arguments:
+			checkClassCaseSensitivity: %checkClassCaseSensitivity%
+			checkThisOnly: %checkThisOnly%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\UninitializedPropertyRule
+		arguments:
+			additionalConstructors: %additionalConstructors%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule
+		arguments:
+			checkThisOnly: %checkThisOnly%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule
+		arguments:
+			checkThisOnly: %checkThisOnly%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\CompactVariablesRule
+		arguments:
+			checkMaybeUndefinedVariables: %checkMaybeUndefinedVariables%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\DefinedVariableRule
+		arguments:
+			cliArgumentsVariablesRegistered: %cliArgumentsVariablesRegistered%
+			checkMaybeUndefinedVariables: %checkMaybeUndefinedVariables%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Regexp\RegularExpressionPatternRule
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Whitespace\FileWhitespaceRule
+

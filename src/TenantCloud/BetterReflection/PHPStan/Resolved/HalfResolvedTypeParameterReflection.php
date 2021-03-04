@@ -2,9 +2,9 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
-use PHPStan\Type\Generic\TemplateTypeVariance;
-use PHPStan\Type\Type;
 use TenantCloud\BetterReflection\Reflection\TypeParameterReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeVariance;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 class HalfResolvedTypeParameterReflection implements TypeParameterReflection
 {

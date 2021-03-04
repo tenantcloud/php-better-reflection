@@ -2,8 +2,8 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Source;
 
-use PHPStan\Reflection\Php\PhpClassReflectionExtension;
-use PHPStan\Reflection\ReflectionProvider;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpClassReflectionExtension;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider;
 
 class PHPStanSourceProvider
 {

@@ -1,0 +1,67 @@
+includes:
+	- config.level1.neon
+
+parameters:
+	checkClassCaseSensitivity: true
+	checkThisOnly: false
+	checkPhpDocMissingReturn: true
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Cast\EchoRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Cast\InvalidCastRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Cast\InvalidPartOfEncapsedStringRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Cast\PrintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\IncompatibleDefaultParameterTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\ClassAncestorsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\ClassTemplateTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\FunctionTemplateTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\FunctionSignatureVarianceRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\InterfaceAncestorsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\InterfaceTemplateTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\MethodTemplateTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\MethodSignatureVarianceRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generics\TraitTemplateTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\IncompatibleDefaultParameterTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Operators\InvalidBinaryOperationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Operators\InvalidUnaryOperationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Operators\InvalidComparisonOperationRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\IncompatiblePhpDocTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\IncompatiblePropertyPhpDocTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\InvalidThrowsPhpDocValueRule
+
+services:
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\MixinRule
+		arguments:
+			checkClassCaseSensitivity: %checkClassCaseSensitivity%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\CallCallablesRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule
+		arguments:
+			checkClassCaseSensitivity: %checkClassCaseSensitivity%
+			checkMissingVarTagTypehint: %checkMissingVarTagTypehint%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule
+		arguments:
+			checkWrongVarUsage: %featureToggles.wrongVarUsage%
+
+		tags:
+			- phpstan.rules.rule
+

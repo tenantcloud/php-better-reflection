@@ -2,18 +2,18 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
-use PhpParser\Node\Name;
-use PhpParser\Node\Stmt\Class_;
-use PHPStan\Analyser\Scope;
-use PHPStan\Broker\Broker;
-use PHPStan\Broker\ClassAutoloadingException;
-use PHPStan\Broker\ClassNotFoundException;
-use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\FunctionReflection;
-use PHPStan\Reflection\GlobalConstantReflection;
-use PHPStan\Reflection\ReflectionProvider;
 use ReflectionClass;
 use RuntimeException;
+use TenantCloud\BetterReflection\Relocated\PhpParser\Node\Name;
+use TenantCloud\BetterReflection\Relocated\PhpParser\Node\Stmt\Class_;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\Scope;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\ClassAutoloadingException;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\ClassNotFoundException;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ClassReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\FunctionReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\GlobalConstantReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider;
 use Throwable;
 
 /**

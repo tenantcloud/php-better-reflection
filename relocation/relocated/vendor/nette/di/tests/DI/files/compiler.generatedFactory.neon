@@ -1,0 +1,47 @@
+services:
+	ipsum: Ipsum
+	bar: Bar
+	baz: Baz
+	lorem: \ILoremFactory(Lorem)
+	finder: IFinderFactory
+	article:
+		factory: TenantCloud\BetterReflection\Relocated\Article(%title%)
+		implement: TenantCloud\BetterReflection\Relocated\IArticleFactory
+		parameters:
+			- title
+
+		setup:
+			- method(@self::ABC)
+			-
+				$prop: @self::ABC
+
+	article2:
+		implement: TenantCloud\BetterReflection\Relocated\IArticleFactory
+		arguments:
+			- %title%
+
+		parameters:
+			- title
+
+	fooFactory1:
+		factory: TenantCloud\BetterReflection\Relocated\Foo(..., %baz%)
+		implement: TenantCloud\BetterReflection\Relocated\IFooFactory
+		parameters:
+			Baz baz: null
+
+	fooFactory3:
+		type: Foo
+		implement: TenantCloud\BetterReflection\Relocated\IFooFactory
+
+	fooFactory4: IFooFactory
+	factory5:
+		implement: TenantCloud\BetterReflection\Relocated\ITestClassFactory
+		arguments:
+			- TenantCloud\BetterReflection\Relocated\foo
+
+	dolorFactory: DolorFactory
+	overridenFactory:
+		setup:
+			-
+				$var: 123
+

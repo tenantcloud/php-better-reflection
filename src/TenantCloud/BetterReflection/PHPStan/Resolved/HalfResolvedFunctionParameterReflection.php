@@ -3,13 +3,13 @@
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
 use Ds\Vector;
-use PHPStan\Type\Generic\TemplateTypeHelper;
-use PHPStan\Type\Generic\TemplateTypeMap;
-use PHPStan\Type\Type;
 use ReflectionAttribute;
 use ReflectionParameter;
 use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\FunctionParameterReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeHelper;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeMap;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedFunctionParameterReflection implements FunctionParameterReflection

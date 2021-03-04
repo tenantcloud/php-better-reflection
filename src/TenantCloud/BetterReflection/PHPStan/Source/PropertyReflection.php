@@ -2,9 +2,9 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Source;
 
-use PHPStan\Reflection\Php\PhpPropertyReflection;
-use PHPStan\Type\Type;
 use ReflectionProperty;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpPropertyReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 class PropertyReflection
 {

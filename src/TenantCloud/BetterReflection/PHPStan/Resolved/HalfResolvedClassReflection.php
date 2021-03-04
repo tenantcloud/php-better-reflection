@@ -4,12 +4,12 @@ namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
 use Ds\Sequence;
 use Ds\Vector;
-use PHPStan\Type\ErrorType;
-use PHPStan\Type\Generic\TemplateTypeMap;
 use ReflectionAttribute;
 use ReflectionClass;
 use TenantCloud\BetterReflection\Reflection\AttributeSequence;
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\ErrorType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeMap;
 use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class HalfResolvedClassReflection implements ClassReflection

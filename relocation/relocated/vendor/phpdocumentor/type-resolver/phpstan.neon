@@ -1,0 +1,5 @@
+parameters:
+	level: max
+	ignoreErrors:
+		- "#Parameter \\#1 \\$tokens of method phpDocumentor\\\\Reflection\\\\Types\\\\ContextFactory::parse#"
+

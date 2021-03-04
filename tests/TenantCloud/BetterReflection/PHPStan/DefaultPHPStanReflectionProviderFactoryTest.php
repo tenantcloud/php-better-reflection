@@ -2,25 +2,8 @@
 
 namespace Tests\TenantCloud\BetterReflection\PHPStan;
 
-use ComplexGenericsExample\SomeClass;
 use Ds\Pair;
 use Ds\Vector;
-use PHPStan\Reflection\FunctionVariant;
-use PHPStan\Reflection\GenericParametersAcceptorResolver;
-use PHPStan\Reflection\PassedByReference;
-use PHPStan\Reflection\Php\DummyParameter;
-use PHPStan\Type\ArrayType;
-use PHPStan\Type\Generic\GenericObjectType;
-use PHPStan\Type\Generic\TemplateMixedType;
-use PHPStan\Type\Generic\TemplateTypeMap;
-use PHPStan\Type\Generic\TemplateTypeParameterStrategy;
-use PHPStan\Type\Generic\TemplateTypeScope;
-use PHPStan\Type\Generic\TemplateTypeVariance;
-use PHPStan\Type\IntegerType;
-use PHPStan\Type\MixedType;
-use PHPStan\Type\NullType;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\StringType;
 use PHPUnit\Framework\TestCase;
 use TenantCloud\BetterReflection\Delegation\PHPStan\DefaultReflectionProviderFactory;
 use TenantCloud\BetterReflection\PHPStan\DefaultPHPStanReflectionProviderFactory;
@@ -28,6 +11,23 @@ use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedFunctionParameterR
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedMethodReflection;
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedPropertyReflection;
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedTypeParameterReflection;
+use TenantCloud\BetterReflection\Relocated\ComplexGenericsExample\SomeClass;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\FunctionVariant;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\GenericParametersAcceptorResolver;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\PassedByReference;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\DummyParameter;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\ArrayType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\GenericObjectType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateMixedType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeMap;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeParameterStrategy;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeScope;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeVariance;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\IntegerType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\MixedType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\NullType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\StringType;
 use TenantCloud\BetterReflection\Shared\DelegatedAttributeSequence;
 
 class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
@@ -161,7 +161,7 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 				'generic',
 				new GenericObjectType(
 					DefaultReflectionProviderFactory::class,
-					[new ObjectType(SomeClass::class), new StringType()],
+					[new ObjectType(SomeStub::class), new StringType()],
 				)
 			),
 		]), $properties);
@@ -191,7 +191,7 @@ class DefaultPHPStanReflectionProviderFactoryTest extends TestCase
 						'param',
 						new GenericObjectType(
 							DefaultReflectionProviderFactory::class,
-							[new ObjectType(SomeClass::class), new StringType()],
+							[new ObjectType(SomeStub::class), new StringType()],
 						)
 					),
 				],

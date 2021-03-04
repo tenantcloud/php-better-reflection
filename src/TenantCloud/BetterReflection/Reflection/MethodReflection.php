@@ -3,7 +3,7 @@
 namespace TenantCloud\BetterReflection\Reflection;
 
 use Ds\Sequence;
-use PHPStan\Type\Type;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 /**
  * @template T of object Type that this method belongs to

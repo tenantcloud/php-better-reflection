@@ -2,7 +2,7 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
-use PHPStan\Type\Type;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 /**
  * @template T of object Type that this property belongs to

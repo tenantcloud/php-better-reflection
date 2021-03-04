@@ -1,0 +1,23 @@
+includes:
+	- config.level0.neon
+
+parameters:
+	checkMaybeUndefinedVariables: true
+	checkExtraArguments: true
+	reportMagicMethods: true
+	reportMagicProperties: true
+
+conditionalTags:
+	PHPStan\Rules\Variables\VariableCertaintyNullCoalesceRule:
+		phpstan.rules.rule: %featureToggles.nullCoalesce%
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\UnusedConstructorParametersRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Constants\ConstantRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\UnusedClosureUsesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\VariableCertaintyInIssetRule
+
+services:
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\VariableCertaintyNullCoalesceRule
+

@@ -1,0 +1,70 @@
+<?php
+
+declare (strict_types=1);
+namespace TenantCloud\BetterReflection\Relocated\PHPStan\Type;
+
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker;
+use TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic;
+class StaticTypeTest extends \TenantCloud\BetterReflection\Relocated\PHPStan\Testing\TestCase
+{
+    public function dataIsIterable() : array
+    {
+        return [[new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('ArrayObject'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('Traversable'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('Unknown'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('DateTime'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createNo()]];
+    }
+    /**
+     * @dataProvider dataIsIterable
+     * @param StaticType $type
+     * @param TrinaryLogic $expectedResult
+     */
+    public function testIsIterable(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType $type, \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic $expectedResult) : void
+    {
+        $actualResult = $type->isIterable();
+        $this->assertSame($expectedResult->describe(), $actualResult->describe(), \sprintf('%s -> isIterable()', $type->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise())));
+    }
+    public function dataIsCallable() : array
+    {
+        return [[new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('Closure'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('Unknown'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('DateTime'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()]];
+    }
+    /**
+     * @dataProvider dataIsCallable
+     * @param StaticType $type
+     * @param TrinaryLogic $expectedResult
+     */
+    public function testIsCallable(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType $type, \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic $expectedResult) : void
+    {
+        $actualResult = $type->isCallable();
+        $this->assertSame($expectedResult->describe(), $actualResult->describe(), \sprintf('%s -> isCallable()', $type->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise())));
+    }
+    public function dataIsSuperTypeOf() : array
+    {
+        $broker = $this->createBroker();
+        return [0 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType('UnknownClassA'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType('UnknownClassB'), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 1 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayAccess::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 2 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Countable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\Countable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 3 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\DateTimeImmutable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 4 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\ArrayObject::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 5 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\Iterator::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 6 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 7 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Iterator::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 8 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\DateTimeImmutable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createNo()], 9 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StringType()]), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 10 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StringType()]), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createNo()], 11 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\LogicException::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\InvalidArgumentException::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 12 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\InvalidArgumentException::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType(\LogicException::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 13 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayAccess::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 14 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Countable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Countable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 15 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 16 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 17 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Iterator::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 18 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 19 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Iterator::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Traversable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 20 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createNo()], 21 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class)]), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 22 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StringType()]), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 23 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\DateTimeImmutable::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\ArrayObject::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StringType()]), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createNo()], 24 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\LogicException::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\InvalidArgumentException::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 25 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\InvalidArgumentException::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\LogicException::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 26 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\stdClass::class), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectWithoutClassType(), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 27 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectWithoutClassType(), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\stdClass::class), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()], 28 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($broker->getClass(\stdClass::class)), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectWithoutClassType(), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createMaybe()], 29 => [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectWithoutClassType(), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($broker->getClass(\stdClass::class)), \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic::createYes()]];
+    }
+    /**
+     * @dataProvider dataIsSuperTypeOf
+     * @param Type $type
+     * @param Type $otherType
+     * @param TrinaryLogic $expectedResult
+     */
+    public function testIsSuperTypeOf(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type $type, \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type $otherType, \TenantCloud\BetterReflection\Relocated\PHPStan\TrinaryLogic $expectedResult) : void
+    {
+        $actualResult = $type->isSuperTypeOf($otherType);
+        $this->assertSame($expectedResult->describe(), $actualResult->describe(), \sprintf('%s -> isSuperTypeOf(%s)', $type->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise()), $otherType->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise())));
+    }
+    public function dataEquals() : array
+    {
+        $reflectionProvider = \TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker::getInstance();
+        return [[new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\Exception::class)), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\Exception::class)), \true], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\Exception::class)), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\InvalidArgumentException::class)), \false], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\Exception::class)), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\Exception::class), \false], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ThisType($reflectionProvider->getClass(\Exception::class)), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType(\InvalidArgumentException::class), \false]];
+    }
+    /**
+     * @dataProvider dataEquals
+     * @param StaticType $type
+     * @param StaticType $otherType
+     * @param bool $expected
+     */
+    public function testEquals(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType $type, \TenantCloud\BetterReflection\Relocated\PHPStan\Type\StaticType $otherType, bool $expected) : void
+    {
+        $this->assertSame($expected, $type->equals($otherType));
+        $this->assertSame($expected, $otherType->equals($type));
+    }
+}

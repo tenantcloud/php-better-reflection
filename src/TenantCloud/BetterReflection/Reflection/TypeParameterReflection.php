@@ -2,8 +2,8 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
-use PHPStan\Type\Generic\TemplateTypeVariance;
-use PHPStan\Type\Type;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeVariance;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 interface TypeParameterReflection
 {

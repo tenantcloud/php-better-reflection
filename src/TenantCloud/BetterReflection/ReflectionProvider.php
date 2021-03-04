@@ -2,8 +2,8 @@
 
 namespace TenantCloud\BetterReflection;
 
-use PHPStan\Type\TypeWithClassName;
 use TenantCloud\BetterReflection\Reflection\ClassReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\TypeWithClassName;
 
 interface ReflectionProvider
 {

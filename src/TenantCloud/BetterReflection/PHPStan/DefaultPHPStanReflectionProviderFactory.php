@@ -2,23 +2,23 @@
 
 namespace TenantCloud\BetterReflection\PHPStan;
 
-use Nette\DI\Extensions\ExtensionsExtension;
-use Nette\DI\Extensions\PhpExtension;
-use PHPStan\BetterReflection\BetterReflection;
-use PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber;
-use PHPStan\Broker\Broker;
-use PHPStan\DependencyInjection\Configurator;
-use PHPStan\DependencyInjection\Container;
-use PHPStan\DependencyInjection\LoaderFactory;
-use PHPStan\File\FileHelper;
-use PHPStan\Php\PhpVersion;
-use PHPStan\Reflection\Php\PhpClassReflectionExtension;
-use PHPStan\Reflection\ReflectionProvider;
 use TenantCloud\BetterReflection\Cache\Cache;
 use TenantCloud\BetterReflection\Cache\ReflectionCacheKeyMaster;
 use TenantCloud\BetterReflection\Cache\SymfonyVarExportCacheStorage;
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedFactory;
 use TenantCloud\BetterReflection\PHPStan\Source\PHPStanSourceProvider;
+use TenantCloud\BetterReflection\Relocated\Nette\DI\Extensions\ExtensionsExtension;
+use TenantCloud\BetterReflection\Relocated\Nette\DI\Extensions\PhpExtension;
+use TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\BetterReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker;
+use TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Configurator;
+use TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Container;
+use TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\LoaderFactory;
+use TenantCloud\BetterReflection\Relocated\PHPStan\File\FileHelper;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersion;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpClassReflectionExtension;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ReflectionProvider;
 use function TenantCloud\Standard\Lazy\lazy;
 
 class DefaultPHPStanReflectionProviderFactory
@@ -53,7 +53,7 @@ class DefaultPHPStanReflectionProviderFactory
 		$currentWorkingDirectory = getcwd();
 		$fileHelper = new FileHelper($currentWorkingDirectory);
 
-		$rootDir = __DIR__ . '/../../../../vendor/phpstan/phpstan-src';
+		$rootDir = __DIR__ . '/../../../../relocation/relocated/vendor/phpstan/phpstan-src';
 		$rootDirectory = $fileHelper->normalizePath($rootDir);
 
 		$configurator = new Configurator(new LoaderFactory(
@@ -79,12 +79,18 @@ class DefaultPHPStanReflectionProviderFactory
 			'composerAutoloaderProjectPaths' => [
 				//				$fileHelper->normalizePath(__DIR__ . '/../../../..')
 			],
-			'analysedPathsFromConfig' => [],
+			'analysedPathsFromConfig'         => [],
+			'cliArgumentsVariablesRegistered' => ini_get('register_argc_argv') === '1',
+			'additionalConfigFiles'           => $this->additionalConfigs,
+			'generateBaselineFile'            => false,
+			'usedLevel'                       => 0,
+			'cliAutoloadFile'                 => null,
+			'fixerTmpDir'                     => $this->cacheDir . '/phpstan-fixer',
 		]);
 		$configurator->addDynamicParameters([
 			'singleReflectionFile' => null,
 		]);
-		$configurator->addConfig(__DIR__ . '/config.neon');
+		$configurator->addConfig($rootDir . '/conf/config.neon');
 
 		foreach ($this->additionalConfigs as $config) {
 			$configurator->addConfig($config);

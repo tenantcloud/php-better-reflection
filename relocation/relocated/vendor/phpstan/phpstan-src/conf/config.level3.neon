@@ -1,0 +1,86 @@
+includes:
+	- config.level2.neon
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\AppendedArrayItemTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\IterableInForeachRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\OffsetAccessAssignmentRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\OffsetAccessAssignOpRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\OffsetAccessValueAssignmentRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\UnpackIterableInArrayRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ArrowFunctionReturnTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ClosureReturnTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generators\YieldTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\ReturnTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\DefaultValueTypesAssignedToPropertiesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\TypesAssignedToPropertiesRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\ThrowTypeRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\VariableCloningRule
+
+conditionalTags:
+	PHPStan\Rules\Arrays\ArrayDestructuringRule:
+		phpstan.rules.rule: %featureToggles.arrayDestructuring%
+
+parameters:
+	checkPhpDocMethodSignatures: true
+
+services:
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\AppendedArrayKeyTypeRule
+		arguments:
+			checkUnionTypes: %checkUnionTypes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\ArrayDestructuringRule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ReturnTypeRule
+		arguments:
+			functionReflector: @betterReflectionFunctionReflector
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generators\YieldFromTypeRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Generators\YieldInGeneratorRule
+		arguments:
+			reportMaybes: %reportMaybes%
+
+		tags:
+			- phpstan.rules.rule
+

@@ -1,0 +1,10 @@
+services:
+	comments: MyBlog\CommentsModel(@connection, @extension.articles)
+	articlesList:
+		factory: TenantCloud\BetterReflection\Relocated\MyBlog\Components\ArticlesList()
+
+	commentsControl:
+		factory: TenantCloud\BetterReflection\Relocated\MyBlog\Components\CommentsControl
+		arguments:
+			- @extension.comments()
+

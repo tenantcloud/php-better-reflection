@@ -2,7 +2,7 @@
 
 namespace TenantCloud\BetterReflection\Reflection;
 
-use PHPStan\Type\Type;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 
 interface FunctionParameterReflection
 {

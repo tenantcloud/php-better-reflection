@@ -1,0 +1,62 @@
+<?php
+
+declare (strict_types=1);
+namespace TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions;
+
+use TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersion;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Rules\ClassCaseSensitivityCheck;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Rules\FunctionDefinitionCheck;
+/**
+ * @extends \PHPStan\Testing\RuleTestCase<ExistingClassesInArrowFunctionTypehintsRule>
+ */
+class ExistingClassesInArrowFunctionTypehintsRuleTest extends \TenantCloud\BetterReflection\Relocated\PHPStan\Testing\RuleTestCase
+{
+    /** @var int */
+    private $phpVersionId = \PHP_VERSION_ID;
+    protected function getRule() : \TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Rule
+    {
+        $broker = $this->createReflectionProvider();
+        return new \TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\ExistingClassesInArrowFunctionTypehintsRule(new \TenantCloud\BetterReflection\Relocated\PHPStan\Rules\FunctionDefinitionCheck($broker, new \TenantCloud\BetterReflection\Relocated\PHPStan\Rules\ClassCaseSensitivityCheck($broker), new \TenantCloud\BetterReflection\Relocated\PHPStan\Php\PhpVersion($this->phpVersionId), \true, \false, \true));
+    }
+    public function testRule() : void
+    {
+        if (!self::$useStaticReflectionProvider && \PHP_VERSION_ID < 70400) {
+            $this->markTestSkipped('Test requires PHP 7.4.');
+        }
+        $this->analyse([__DIR__ . '/data/arrow-function-typehints.php'], [['Parameter $bar of anonymous function has invalid typehint type ArrowFunctionExistingClassesInTypehints\\Bar.', 10], ['Return typehint of anonymous function has invalid type ArrowFunctionExistingClassesInTypehints\\Baz.', 10]]);
+    }
+    public function dataNativeUnionTypes() : array
+    {
+        return [[70400, [['Anonymous function uses native union types but they\'re supported only on PHP 8.0 and later.', 23], ['Anonymous function uses native union types but they\'re supported only on PHP 8.0 and later.', 24]]], [80000, []]];
+    }
+    /**
+     * @dataProvider dataNativeUnionTypes
+     * @param int $phpVersionId
+     * @param mixed[] $errors
+     */
+    public function testNativeUnionTypes(int $phpVersionId, array $errors) : void
+    {
+        if (!self::$useStaticReflectionProvider && \PHP_VERSION_ID < 80000) {
+            $this->markTestSkipped('Test requires PHP 8.0.');
+        }
+        $this->phpVersionId = $phpVersionId;
+        $this->analyse([__DIR__ . '/data/native-union-types.php'], $errors);
+    }
+    public function dataRequiredParameterAfterOptional() : array
+    {
+        return [[70400, []], [80000, [['Deprecated in PHP 8.0: Required parameter $bar follows optional parameter $foo.', 5], ['Deprecated in PHP 8.0: Required parameter $bar follows optional parameter $foo.', 9], ['Deprecated in PHP 8.0: Required parameter $bar follows optional parameter $foo.', 11]]]];
+    }
+    /**
+     * @dataProvider dataRequiredParameterAfterOptional
+     * @param int $phpVersionId
+     * @param mixed[] $errors
+     */
+    public function testRequiredParameterAfterOptional(int $phpVersionId, array $errors) : void
+    {
+        if (!self::$useStaticReflectionProvider && \PHP_VERSION_ID < 70400) {
+            $this->markTestSkipped('Test requires PHP 7.4.');
+        }
+        $this->phpVersionId = $phpVersionId;
+        $this->analyse([__DIR__ . '/data/required-parameter-after-optional-arrow.php'], $errors);
+    }
+}

@@ -1,0 +1,181 @@
+includes:
+	- config.level3.neon
+
+rules:
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Arrays\DeadForeachRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\DeadCode\NoopRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\DeadCode\UnreachableStatementRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Exceptions\DeadCatchRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Functions\CallToFunctionStamentWithoutSideEffectsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\CallToConstructorStatementWithoutSideEffectsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\CallToMethodStamentWithoutSideEffectsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\CallToStaticMethodStamentWithoutSideEffectsRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Methods\NullsafeMethodCallRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Properties\NullsafePropertyFetchRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\TooWideTypehints\TooWideArrowFunctionReturnTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\TooWideTypehints\TooWideClosureReturnTypehintRule
+	- TenantCloud\BetterReflection\Relocated\PHPStan\Rules\TooWideTypehints\TooWideFunctionReturnTypehintRule
+
+conditionalTags:
+	PHPStan\Rules\DeadCode\UnusedPrivateConstantRule:
+		phpstan.rules.rule: %featureToggles.unusedClassElements%
+
+	PHPStan\Rules\DeadCode\UnusedPrivateMethodRule:
+		phpstan.rules.rule: %featureToggles.unusedClassElements%
+
+	PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule:
+		phpstan.rules.rule: %featureToggles.unusedClassElements%
+
+	PHPStan\Rules\Variables\IssetRule:
+		phpstan.rules.rule: %featureToggles.nullCoalesce%
+
+	PHPStan\Rules\Variables\NullCoalesceRule:
+		phpstan.rules.rule: %featureToggles.nullCoalesce%
+
+services:
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Classes\ImpossibleInstanceOfRule
+		arguments:
+			checkAlwaysTrueInstanceof: %checkAlwaysTrueInstanceof%
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\BooleanAndConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+			checkLogicalAndConstantCondition: %featureToggles.checkLogicalAndConstantCondition%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\BooleanOrConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+			checkLogicalOrConstantCondition: %featureToggles.checkLogicalOrConstantCondition%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\BooleanNotConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\DeadCode\UnusedPrivateConstantRule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\DeadCode\UnusedPrivateMethodRule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule
+		arguments:
+			alwaysWrittenTags: %propertyAlwaysWrittenTags%
+			alwaysReadTags: %propertyAlwaysReadTags%
+			checkUninitializedProperties: %checkUninitializedProperties%
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\ElseIfConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\IfConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule
+		arguments:
+			checkAlwaysTrueCheckTypeFunctionCall: %checkAlwaysTrueCheckTypeFunctionCall%
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule
+		arguments:
+			checkAlwaysTrueCheckTypeFunctionCall: %checkAlwaysTrueCheckTypeFunctionCall%
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule
+		arguments:
+			checkAlwaysTrueCheckTypeFunctionCall: %checkAlwaysTrueCheckTypeFunctionCall%
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\MatchExpressionRule
+		arguments:
+			checkAlwaysTrueStrictComparison: %checkAlwaysTrueStrictComparison%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule
+		arguments:
+			checkAlwaysTrueStrictComparison: %checkAlwaysTrueStrictComparison%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\UnreachableIfBranchesRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule
+		arguments:
+			treatPhpDocTypesAsCertain: %treatPhpDocTypesAsCertain%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule
+		arguments:
+			checkProtectedAndPublicMethods: %checkTooWideReturnTypesInProtectedAndPublicMethods%
+
+		tags:
+			- phpstan.rules.rule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\IssetRule
+
+	-
+		class: TenantCloud\BetterReflection\Relocated\PHPStan\Rules\Variables\NullCoalesceRule
+

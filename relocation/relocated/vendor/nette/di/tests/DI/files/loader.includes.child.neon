@@ -1,0 +1,10 @@
+parameters:
+	me:
+		- loader.includes.child.neon
+
+	scalar: 3
+	list: null
+
+services:
+	a: stdClass
+

@@ -1,0 +1,47 @@
+<?php
+
+declare (strict_types=1);
+namespace TenantCloud\BetterReflection\Relocated\PHPStan\Analyser;
+
+use TenantCloud\BetterReflection\Relocated\PhpParser\Node\Expr\ConstFetch;
+use TenantCloud\BetterReflection\Relocated\PhpParser\Node\Name\FullyQualified;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Testing\TestCase;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel;
+class ScopeTest extends \TenantCloud\BetterReflection\Relocated\PHPStan\Testing\TestCase
+{
+    public function dataGeneralize() : array
+    {
+        return [[new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), '\'a\''], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('b'), 'string'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), 'int'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(2)]), 'int'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('foo')]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('foo')]), '0|1|\'foo\''], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('foo')]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(0), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(2), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('foo')]), '\'foo\'|int'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType(\false), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType('Foo'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType(\false)]), 'Foo|false'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\UnionType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType('Foo'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType(\false)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType(\false), 'Foo|false'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType('Foo'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantBooleanType(\false), 'Foo'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), 'array(\'a\' => 1)'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('b')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('b')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(2), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), 'array(\'a\' => int, \'b\' => 1)'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('b')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), 'array<string, 1>'], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1)]), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantArrayType([new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('a'), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantStringType('b')], [new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(1), new \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Constant\ConstantIntegerType(2)]), 'array<string, int>']];
+    }
+    /**
+     * @dataProvider dataGeneralize
+     * @param Type $a
+     * @param Type $b
+     * @param string $expectedTypeDescription
+     */
+    public function testGeneralize(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type $a, \TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type $b, string $expectedTypeDescription) : void
+    {
+        /** @var ScopeFactory $scopeFactory */
+        $scopeFactory = self::getContainer()->getByType(\TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeFactory::class);
+        $scopeA = $scopeFactory->create(\TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeContext::create('file.php'))->assignVariable('a', $a);
+        $scopeB = $scopeFactory->create(\TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeContext::create('file.php'))->assignVariable('a', $b);
+        $resultScope = $scopeA->generalizeWith($scopeB);
+        $this->assertSame($expectedTypeDescription, $resultScope->getVariableType('a')->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise()));
+    }
+    public function testGetConstantType() : void
+    {
+        /** @var ScopeFactory $scopeFactory */
+        $scopeFactory = self::getContainer()->getByType(\TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeFactory::class);
+        $scope = $scopeFactory->create(\TenantCloud\BetterReflection\Relocated\PHPStan\Analyser\ScopeContext::create(__DIR__ . '/data/compiler-halt-offset.php'));
+        $node = new \TenantCloud\BetterReflection\Relocated\PhpParser\Node\Expr\ConstFetch(new \TenantCloud\BetterReflection\Relocated\PhpParser\Node\Name\FullyQualified('__COMPILER_HALT_OFFSET__'));
+        $type = $scope->getType($node);
+        $this->assertSame('int', $type->describe(\TenantCloud\BetterReflection\Relocated\PHPStan\Type\VerbosityLevel::precise()));
+    }
+}

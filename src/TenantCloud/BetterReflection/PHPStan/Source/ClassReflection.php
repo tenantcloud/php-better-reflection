@@ -2,15 +2,15 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Source;
 
-use PHPStan\Reflection\ParametersAcceptorSelector;
-use PHPStan\Reflection\Php\PhpClassReflectionExtension;
 use ReflectionMethod;
 use ReflectionProperty;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ParametersAcceptorSelector;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\Php\PhpClassReflectionExtension;
 
 class ClassReflection
 {
 	public function __construct(
-		public \PHPStan\Reflection\ClassReflection $delegate,
+		public \TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ClassReflection $delegate,
 		private PhpClassReflectionExtension $phpClassReflectionExtension,
 	) {
 	}

@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php 
+declare (strict_types=1);
+namespace TenantCloud\BetterReflection\Relocated;
+
+use TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Console\CompileCommand;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Filesystem\SymfonyFilesystem;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Process\DefaultProcessFactory;
+use TenantCloud\BetterReflection\Relocated\Symfony\Component\Console\Application;
+require_once __DIR__ . '/../vendor/autoload.php';
+$compileCommand = new \TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Console\CompileCommand(new \TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Filesystem\SymfonyFilesystem(new \TenantCloud\BetterReflection\Relocated\Symfony\Component\Filesystem\Filesystem()), new \TenantCloud\BetterReflection\Relocated\PHPStan\Compiler\Process\DefaultProcessFactory(), __DIR__ . '/../build', \realpath(__DIR__ . '/../..'));
+$application = new \TenantCloud\BetterReflection\Relocated\Symfony\Component\Console\Application();
+$application->add($compileCommand);
+$application->setDefaultCommand($compileCommand->getName(), \true);
+$application->run();

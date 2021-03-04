@@ -1,0 +1,114 @@
+services:
+	one1:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+		alteration: true
+
+	one2:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+		arguments:
+			- 2
+
+	one3:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum(2)
+
+	one4:
+		arguments:
+			- 2
+
+	one5:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+
+	one6:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+		arguments:
+			- 2
+
+	one7:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create(2)
+
+	one8!:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+
+	one9:
+		type: Ipsum
+
+	one10:
+		class: TenantCloud\BetterReflection\Relocated\Ipsum
+
+	two1:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+
+	two2:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+		arguments:
+			- 2
+
+	two3:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum(2)
+
+	two4:
+		arguments:
+			- 2
+
+	two5:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+
+	two6:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+		arguments:
+			- 2
+
+	two7:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create(2)
+
+	two8:
+		arguments:
+			1: TenantCloud\BetterReflection\Relocated\new
+
+	two9:
+		arguments!:
+			- new
+
+	two10:
+		factory: TenantCloud\BetterReflection\Relocated\Factory::createLorem(2)
+		arguments:
+			1: TenantCloud\BetterReflection\Relocated\new
+
+	two11:
+		type: Ipsum
+
+	two12:
+		class: TenantCloud\BetterReflection\Relocated\Ipsum
+
+	three1:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+
+	three2:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum
+		arguments:
+			- 2
+
+	three3:
+		factory: TenantCloud\BetterReflection\Relocated\Ipsum(2)
+
+	three4:
+		arguments:
+			- 2
+
+	three5:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+
+	three6:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create
+		arguments:
+			- 2
+
+	three7:
+		factory: TenantCloud\BetterReflection\Relocated\IpsumFactory::create(2)
+
+	three8:
+		type: Ipsum
+
+	three9:
+		class: TenantCloud\BetterReflection\Relocated\Ipsum
+

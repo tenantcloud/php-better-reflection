@@ -2,13 +2,13 @@
 
 namespace TenantCloud\BetterReflection\Cache;
 
+use Illuminate\Support\Str;
 use InvalidArgumentException;
-use Nette\Utils\Random;
-use PHPStan\Cache\CacheItem;
-use PHPStan\Cache\CacheStorage;
-use PHPStan\Cache\FileCacheStorage;
-use PHPStan\File\FileWriter;
 use Symfony\Component\VarExporter\VarExporter;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Cache\CacheItem;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Cache\CacheStorage;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Cache\FileCacheStorage;
+use TenantCloud\BetterReflection\Relocated\PHPStan\File\FileWriter;
 
 /**
  * Basically a {@see FileCacheStorage}, but uses Symfony's VarExporter as it's faster.
@@ -58,7 +58,7 @@ class SymfonyVarExportCacheStorage implements CacheStorage
 		$this->makeDir($firstDirectory);
 		$this->makeDir($secondDirectory);
 
-		$tmpPath = sprintf('%s/%s.tmp', $this->directory, Random::generate());
+		$tmpPath = sprintf('%s/%s.tmp', $this->directory, Str::random());
 		$exported = VarExporter::export(new CacheItem($variableKey, $data));
 
 		FileWriter::write(

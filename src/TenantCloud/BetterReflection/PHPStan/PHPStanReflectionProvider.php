@@ -2,12 +2,6 @@
 
 namespace TenantCloud\BetterReflection\PHPStan;
 
-use PHPStan\Broker\Broker;
-use PHPStan\DependencyInjection\Type\DirectDynamicReturnTypeExtensionRegistryProvider;
-use PHPStan\DependencyInjection\Type\DirectOperatorTypeSpecifyingExtensionRegistryProvider;
-use PHPStan\Type\Generic\GenericObjectType;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\TypeWithClassName;
 use ReflectionClass;
 use TenantCloud\BetterReflection\Cache\Cache;
 use TenantCloud\BetterReflection\Cache\ReflectionCacheKeyMaster;
@@ -15,6 +9,12 @@ use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedClassReflection;
 use TenantCloud\BetterReflection\PHPStan\Resolved\HalfResolvedFactory;
 use TenantCloud\BetterReflection\PHPStan\Resolved\NoResolveReflectionProvider;
 use TenantCloud\BetterReflection\ReflectionProvider;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Broker\Broker;
+use TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\DirectDynamicReturnTypeExtensionRegistryProvider;
+use TenantCloud\BetterReflection\Relocated\PHPStan\DependencyInjection\Type\DirectOperatorTypeSpecifyingExtensionRegistryProvider;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\GenericObjectType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\ObjectType;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\TypeWithClassName;
 
 /**
  * Provides reflection through PHPStan and partly native reflection with additional caching.

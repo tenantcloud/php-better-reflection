@@ -2,14 +2,14 @@
 
 namespace TenantCloud\BetterReflection\PHPStan\Resolved;
 
-use PHPStan\PhpDoc\Tag\TemplateTag;
-use PHPStan\Reflection\ParameterReflection;
-use PHPStan\Type\Generic\TemplateTypeVariance;
-use PHPStan\Type\Type;
 use TenantCloud\BetterReflection\PHPStan\Source\ClassReflection;
 use TenantCloud\BetterReflection\PHPStan\Source\MethodReflection;
 use TenantCloud\BetterReflection\PHPStan\Source\PHPStanSourceProvider;
 use TenantCloud\BetterReflection\PHPStan\Source\PropertyReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\PhpDoc\Tag\TemplateTag;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Reflection\ParameterReflection;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Generic\TemplateTypeVariance;
+use TenantCloud\BetterReflection\Relocated\PHPStan\Type\Type;
 use TenantCloud\Standard\Lazy\Lazy;
 
 class HalfResolvedFactory
